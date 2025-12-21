@@ -183,7 +183,11 @@ async function init()
     ui.style.display = 'block';
   }
 
-  if (navigator.userAgent.search("Firefox")) {
+  if (window.mobile()) {
+    video.classList.remove("d-none");
+  }
+
+  else if (navigator.userAgent.search("Firefox")) {
     video.classList.remove("d-none");
     lastFrame.classList.add("d-none");
     placeholder.style.opacity = 0;
