@@ -26,10 +26,20 @@ section {
 #qt-shadow-container {
   opacity: 0.0;
 }
+.x86_64, .arm64 {
+  margin: 10px;
+  display: inline-block;
+}
+#v2-0, #v1-2, #v1-1, #v1-0 {
+  display: none;
+}
+#v2-0 {
+  display: initial;
+}
     </style>
   </head>
   <body onload="init()">
-    <!--   Main Menu   -->
+    <!--   Navigation Menu   -->
     <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary shadow-sm">
       <div class="container-fluid">
         <a href="https://qprompt.app" class="navbar-brand">
@@ -74,6 +84,10 @@ section {
           <h1 class="">QPrompt<br>Teleprompter App</h1>
           <p>Made for productivity, ease of use<br>&amp; smooth performance</p>
           <a href="#downloads" class="btn btn-lg btn-outline-primary mb-3">Go to Downloads</a>
+          <!--
+          <a href="#downloads" class="btn btn-lg btn-outline-primary mb-1">Go to Downloads</a>
+          <br>
+          <a href="online" class="btn btn-lg btn-outline-secondary btn-sm mb-3">Try on Browser</a> -->
         </div>
         <div id="screen" class="z-0 position-relative" style="margin-y: auto; margin-top: 6%;">
           <!-- Video res: 3840x2160 -->
@@ -86,164 +100,309 @@ section {
       <div class="position-relative d-block text-center">
         <a href="#features" class="my-4 align-middle btn btn-outline-secondary">&darr; Why use QPrompt &darr;</a>
       </div>
+      <hr class="invisible">
     </section>
     <!--   Downloads   -->
-    <section id="downloads" class="container py-5">
+    <section id="downloads" class="container-fluid px-4 py-5">
       <h2 class="text-center">Downloads</h2>
        <div class="d-block text-center">
         <a class="btn btn-primary btn-lg mx-auto mb-3" href="https://sourceforge.net/projects/qprompt/files/latest/download">Download for this device</a>
-        <!-- <hr> -->
       </div>
-      <form id="download-form" class="float-end">
-        <label for="osradio" class="my-1"><strong>Platform:</strong></label>
-        <div class="btn-group mb-1" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="osradio" id="all-os-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="all-os-radio">All</label>
-          <input type="radio" class="btn-check" name="osradio" id="linux-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="linux-radio">Linux</label>
-          <input type="radio" class="btn-check" name="osradio" id="macOS-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="macOS-radio">macOS</label>
-          <input type="radio" class="btn-check" name="osradio" id="windows-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="windows-radio">Windows</label>
-          <input type="radio" class="btn-check" name="osradio" id="haiku-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="haiku-radio">Haiku</label>
-          <input type="radio" class="btn-check" name="osradio" id="android-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="android-radio">Android</label>
-          <!--<input type="radio" class="btn-check" name="osradio" id="ios-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="ios-radio">iOS</label>-->
-          <!--<input type="radio" class="btn-check" name="osradio" id="web-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="web-radio">Web</label>-->
+      <form id="download-form" name="download-form" class="float-end px-sm-3 mx-sm-3 py-4">
+        <h3 class="d-block">Filter Downloads</h4>
+        <div>
+          <label for="ver" class="my-1"><strong>Version:</strong></label>
+          <div class="btn-group mb-2" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="ver" id="ea-radio" autocomplete="off" value="ea">
+            <label class="btn btn-outline-primary" for="ea-radio">Early Access (<em>betas</em>)</label>
+            <input type="radio" class="btn-check" name="ver" id="v2.0-radio" autocomplete="off" value="2.0" checked>
+            <label class="btn btn-outline-primary" for="v2.0-radio">2.0</label>
+            <input type="radio" class="btn-check" name="ver" id="v1.2-radio" autocomplete="off" value="1.2">
+            <label class="btn btn-outline-primary" for="v1.2-radio">1.2</label>
+            <input type="radio" class="btn-check" name="ver" id="v1.1-radio" autocomplete="off" value="1.1">
+            <label class="btn btn-outline-primary" for="v1.1-radio">1.1</label>
+            <input type="radio" class="btn-check" name="ver" id="v1.0-radio" autocomplete="off" value="1.0">
+            <label class="btn btn-outline-primary" for="v1.0-radio">1.0</label>
+          </div>
         </div>
-        <br>
-        <label for="osradio" class="my-1"><strong>CPU Architecture:</strong></label>
-        <div class="btn-group mb-1" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="archradio" id="allarch-radio" autocomplete="off" checked>
-          <label class="btn btn-outline-primary" for="allarch-radio">All</label>
-          <input type="radio" class="btn-check" name="archradio" id="x86_64-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="x86_64-radio">Intel &amp; AMD</label>
-          <input type="radio" class="btn-check" name="archradio" id="arm64-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="arm64-radio">ARM &amp; Apple</label>
-          <!--<input type="radio" class="btn-check" name="archradio" id="web-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="web-radio">Web</label>-->
+        <div>
+          <label for="platform" class="my-1"><strong>Platform:</strong></label>
+          <div class="btn-group mb-2" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="platform" id="all-os-radio" autocomplete="off" value="all" checked>
+            <label class="btn btn-outline-primary" for="all-os-radio">All</label>
+            <input type="radio" class="btn-check" name="platform" id="linux-radio" autocomplete="off" value="linux">
+            <label class="btn btn-outline-primary" for="linux-radio">Linux</label>
+            <input type="radio" class="btn-check" name="platform" id="macOS-radio" autocomplete="off" value="macos">
+            <label class="btn btn-outline-primary" for="macOS-radio">macOS</label>
+            <input type="radio" class="btn-check" name="platform" id="windows-radio" autocomplete="off" value="windows">
+            <label class="btn btn-outline-primary" for="windows-radio">Windows</label>
+            <!--<input type="radio" class="btn-check" name="platform" id="android-radio" autocomplete="off" value="android">
+            <label class="btn btn-outline-primary" for="android-radio">Android</label>-->
+            <!--<input type="radio" class="btn-check" name="platform" id="ios-radio" autocomplete="off" value="ios">
+            <label class="btn btn-outline-primary" for="ios-radio">iOS</label>-->
+            <input type="radio" class="btn-check" name="platform" id="other-radio" autocomplete="off" value="other">
+            <label class="btn btn-outline-primary" for="other-radio">Other</label>
+          </div>
         </div>
-        <br>
-        <label for="verradio" class="my-1"><strong>Version:</strong></label>
-        <div class="btn-group mb-2" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" class="btn-check" name="verradio" id="ea-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="ea-radio">Early Access (<em>betas</em>)</label>
-          <input type="radio" class="btn-check" name="verradio" id="v2.0-radio" autocomplete="off" checked>
-          <label class="btn btn-outline-primary" for="v2.0-radio">2.0</label>
-          <input type="radio" class="btn-check" name="verradio" id="v1.2-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="v1.2-radio">1.2</label>
-          <input type="radio" class="btn-check" name="verradio" id="v1.1-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="v1.1-radio">1.1</label>
-          <!--<input type="radio" class="btn-check" name="verradio" id="v1.1.6-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="v1.1.6-radio">1.1.6</label>
-          <input type="radio" class="btn-check" name="verradio" id="v1.1.2-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="v1.1.2-radio">1.1.2</label>-->
-          <input type="radio" class="btn-check" name="verradio" id="v1.0-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="v1.0-radio">1.0</label>
-          <!--<input type="radio" class="btn-check" name="verradio" id="vi-radio" autocomplete="off">
-          <label class="btn btn-outline-primary" for="vi-radio">v<em>i</em></label>-->
+        <div>
+          <label for="arch" class="my-1"><strong>CPU Architecture:</strong></label>
+          <div class="btn-group mb-2" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="arch" id="allarch-radio" autocomplete="off" value="all" checked>
+            <label class="btn btn-outline-primary" for="allarch-radio">All</label>
+            <input type="radio" class="btn-check" name="arch" id="x86_64-radio" autocomplete="off" value="x86_64">
+            <label class="btn btn-outline-primary" for="x86_64-radio">Intel &amp; AMD</label>
+            <input type="radio" class="btn-check" name="arch" id="arm64-radio" autocomplete="off" value="arm64">
+            <label class="btn btn-outline-primary" for="arm64-radio">ARM &amp; Apple</label>
+          </div>
         </div>
-        <br>
+        <!--<div class="d-block">
+          <input type="submit" class="btn btn-outline-info d-none" name="download-form" id="submit-download-form" value="Update Selection">
+        </div>-->
       </form>
-      <div>
-        <h3>QPrompt 2.0</h4>
-        <h4>Linux</h4>
-        <div>
-          <h5>x86_64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-          <a href="#" class="btn btn-outline-info">Flatpak</a>
-          <a href="#" class="btn btn-outline-info">Snap</a>
-          <h5>arm64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-          <a href="#" class="btn btn-outline-info">Flatpak</a>
-        </div>
-        <h4>macOS</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Apple</a>
-          <a href="#" class="btn btn-outline-info">Intel</a>
-        </div>
-        <h4>Windows</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Installer</a>
-        </div>
-      </div>
-      <div>
-        <h3>QPrompt 1.2</h4>
-        <h4>Linux</h4>
-        <div>
-          <h5>x86_64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-          <a href="#" class="btn btn-outline-info">AppImage</a>
-          <h5>arm64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-        </div>
-        <h4>macOS</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Intel</a>
-        </div>
-        <h4>Windows</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Installer</a>
-        </div>
-      </div>
-      <div>
-        <h3>QPrompt 1.1.6</h4>
-        <h4>Linux</h4>
-        <div>
-          <h5>x86_64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-          <a href="#" class="btn btn-outline-info">AppImage</a>
-          <h5>arm64</h5>
-          <a href="#" class="btn btn-outline-info">Deb</a>
-        </div>
-        <h4>macOS</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Intel</a>
-        </div>
-        <h4>Windows</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Installer</a>
+      <div id="v2-0">
+        <h3 class="d-inline-block">QPrompt 2.0</h4>
+        <div class="d-flex flex-wrap justify-content-evenly align-content-between">
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Linux</h5>
+                <div class="x86_64">
+                  <h6>x86_64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                  <a href="#" class="btn btn-outline-info">Flatpak</a>
+                  <a href="#" class="btn btn-outline-info">Snap</a>
+                </div>
+                <div class="arm64">
+                  <h6>arm64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                  <a href="#" class="btn btn-outline-info">Flatpak</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v2.0.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">macOS</h5>
+                <div class="arm64">
+                  <h6>Apple Silicon</h6>
+                  <a href="#" class="btn btn-outline-info">DMG</a>
+                </div>
+                <div class="x86_64">
+                  <h6>Intel</h6>
+                  <a href="#" class="btn btn-outline-info">DMG</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v2.0.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Windows</h5>
+                  <div class="x86_64">
+                    <h6>x86_64</h6>
+                    <a href="#" class="btn btn-outline-info">Installer</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v2.0.0 - </small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <h3>QPrompt 1.1.2</h4>
-        <h4>Android</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">APK</a>
-        </div>
-        <h4>Haiku OS</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">HPKG</a>
+      <div id="v1-2">
+        <h3 class="d-inline-block">QPrompt 1.2</h4>
+        <div class="d-flex flex-wrap justify-content-evenly align-content-between">
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Linux</h5>
+                <div class="x86_64">
+                  <h6>x86_64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                  <a href="#" class="btn btn-outline-info">AppImage</a>
+                </div>
+                <div class="arm64">
+                  <h6>arm64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.2.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">macOS</h5>
+                <div class="x86_64">
+                  <h6>Intel</h6>
+                  <a href="#" class="btn btn-outline-info">DMG</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.2.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Windows</h5>
+                <div class="x86_64">
+                  <h6>x86_64</h6>
+                  <a href="#" class="btn btn-outline-info">Installer</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.2.0 - </small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <h3>QPrompt 1.0</h4>
-        <h4>Linux</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">AppImage</a>
-        </div>
-        <h4>macOS</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Intel</a>
-        </div>
-        <h4>Windows</h4>
-        <div>
-          <a href="#" class="btn btn-outline-info">Installer</a>
+      <div id="v1-1">
+        <h3 class="d-inline-block">QPrompt 1.1</h4>
+        <div class="d-flex flex-wrap justify-content-evenly align-content-between">
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Linux</h5>
+                <div class="x86_64">
+                  <h6>x86_64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                  <a href="#" class="btn btn-outline-info">AppImage</a>
+                </div>
+                <div class="arm64">
+                  <h6>arm64</h6>
+                  <a href="#" class="btn btn-outline-info">Deb</a>
+                </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.1.6 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">macOS</h5>
+
+                  <div class="x86_64">
+                    <h6>Intel</h6>
+                    <a href="#" class="btn btn-outline-info">DMG</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.1.6 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Windows</h5>
+                  <div class="x86_64">
+                    <h6>x86_64</h6>
+                    <a href="#" class="btn btn-outline-info">Installer</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.1.6 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Android</h5>
+                  <div class="arm64">
+                    <h6>arm64</h6>
+                    <a href="#" class="btn btn-outline-info">APK</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.1.2 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Haiku OS</h5>
+                  <div class="x86_64">
+                    <h6>x86_64</h6>
+                    <a href="#" class="btn btn-outline-info">HPKG</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.1.2 - </small>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
-    <!--   Community   -->
-    <section id="contribute" class="container">
+      <div id="v1-0">
+        <h3 class="d-inline-block">QPrompt 1.0</h4>
+        <div class="d-flex flex-wrap justify-content-evenly align-content-between">
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Linux</h5>
+                  <div class="x86_64">
+                    <h6>x86_64</h6>
+                    <a href="#" class="btn btn-outline-info">AppImage</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.0.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">macOS</h5>
+                  <div class="x86_64">
+                    <h6>Intel</h6>
+                    <a href="#" class="btn btn-outline-info">DMG</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.0.0 - </small>
+              </div>
+            </div>
+          </div>
+          <div class="pb-4" style="min-width: 210px">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Windows</h5>
+                  <div class="x86_64">
+                    <h6>x86_64</h6>
+                    <a href="#" class="btn btn-outline-info">Installer</a>
+                  </div>
+              </div>
+              <div class="card-footer text-truncate">
+                <small class="text-body-secondary">v1.0.0 - </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <hr>
-      <h2>Community</h2>
     </section>
     <section id="features">
       <div class="container">
         <hr>
-        <h2>Reasons to Use QPrompt</h2>
+        <h2 class="text-center">Reasons to Use QPrompt</h2>
         <div class="">
           <p>QPrompt is a high-quality, feature-rich, teleprompter app made with productivity and smooth performance in mind. It aims to solve the needs of teleprompter operators working in the events industry and of video content creators working individually or in small teams.</p>
           <p>QPrompt is free to download and use for any purpose, including commercial use.</p>
@@ -324,8 +483,8 @@ section {
     </section>
     <footer>
       <hr>
-      <div class="container">
-        <div class="d-flex justify-content-between">
+      <div class="container-fluid">
+        <div class="d-flex justify-content-around">
           <div class="">
             <span class="copyright">&copy; 2026 Javier O. Cordero Pérez</span>
           </div>
