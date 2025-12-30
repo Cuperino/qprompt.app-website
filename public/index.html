@@ -18,7 +18,7 @@
   height: calc( 100vh - 130px );
 }
 section {
-/*   min-height: 60vh; */
+  /* section styling */
 }
 #placeholder-prompter {
   opacity: 0.75;
@@ -90,13 +90,14 @@ section {
           <a href="online" class="btn btn-lg btn-outline-secondary btn-sm mb-3">Try on Browser</a> -->
         </div>
         <div id="screen" class="z-0 position-relative" style="margin-left: auto; margin-right: auto; margin-top: 6%;" 
-             x-data="heroPrompter({ scale: 0.46 })">
+             x-data="heroPrompter({ scale: 0.65 })">
           <!-- Video res: 3840x2160 -->
           <img src="img/video-last-frame.webp" id="last-frame" width="4224" height="2376" 
                class="origin-top-left" 
                x-bind:style="wrapperStyle">
           <video id="top-video" width="4224" height="2376" autoplay muted playsinline 
-                 class="d-none origin-top-left" 
+                 class="origin-top-left" 
+                 style="transition: opacity 1.0s ease-out; opacity: 0;"
                  x-bind:style="wrapperStyle" 
                  src="video/website-prompter.webm" type="video/webm"></video>
           <img src="img/qprompt-wasm.webp" id="placeholder-prompter" class="position-absolute" width="100%">
@@ -610,18 +611,18 @@ section {
 
       if (window.mobile()) {
         lastFrame.classList.remove("d-none");
-        video.classList.add("d-none");
+        video.style.display = "none";
       }
       else if (navigator.userAgent.search("Firefox") !== -1) {
-        video.classList.remove("d-none");
-        lastFrame.classList.add("d-none");
+        video.style.opacity = 1;
+        lastFrame.classList.remove("d-none"); // Keep it behind
         placeholder.style.opacity = 0;
       }
       else {
         video.addEventListener("canplay", () => {
           if (!window.mobile()) {
-            video.classList.remove("d-none");
-            lastFrame.classList.add("d-none");
+            video.style.opacity = 1;
+            lastFrame.classList.remove("d-none"); // Keep it behind
             // Keep placeholder visible during video play
             placeholder.classList.add("opacity-0");
           }
@@ -632,19 +633,24 @@ section {
       loadWasm(screen, status);
 
       video.addEventListener("ended", () => {
+        // Fade out video to reveal last-frame image behind it
+        video.style.opacity = 0;
+
         // When video ends, show the mockup/app
-        placeholder.classList.remove("opacity-0");
-        placeholder.classList.add("opacity-100");
-        placeholder.style.transition = "opacity 1.0s ease-in";
-        
         setTimeout(() => {
-          const appContainer = document.querySelector('#qt-shadow-container');
-          if (appContainer) {
-            appContainer.style.transition = "opacity 1.0s ease-in";
-            appContainer.classList.remove("opacity-0");
-            appContainer.classList.add("opacity-75");
-          }
-        }, 100);
+          placeholder.classList.remove("opacity-0");
+          placeholder.classList.add("opacity-100");
+          placeholder.style.transition = "opacity 1.0s ease-in";
+          
+          setTimeout(() => {
+            const appContainer = document.querySelector('#qt-shadow-container');
+            if (appContainer) {
+              appContainer.style.transition = "opacity 1.0s ease-in";
+              appContainer.classList.remove("opacity-0");
+              appContainer.classList.add("opacity-75");
+            }
+          }, 100);
+        }, 500); // Small delay to let the video fade out a bit first
       });
     }
 
