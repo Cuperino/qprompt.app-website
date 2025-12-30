@@ -69,4 +69,4 @@ This project is licensed under the ISC License - see the [LICENSE](LICENSE) file
 
 ---
 
-Developed with ❤️ by [Javier O. Cordero Pérez](https://github.com/Cuperino).
+Developed with ❤️ by [Javier O. Cordero Pérez](https://github.com/Cuperino) & Contributors.
