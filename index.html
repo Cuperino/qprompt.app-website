@@ -97,7 +97,7 @@
                 <div class="relative w-full max-w-5xl aspect-video">
                     <!-- The exact structure required by the logic -->
                     <div id="screen" class="z-0 relative mx-auto" 
-                         x-data="heroPrompter({ scale: 0.80, fudgeX: -165, fudgeY: 50, placeholderScale: 0.83, placeholderX: -90, placeholderY: 0})"
+                         x-data="heroPrompter({ scale: 0.85, fudgeX: -250, fudgeY: 50, wasmScale: 1, wasmX: 0, wasmY: 0})"
                          style="margin-top: 6%;">
                         <!-- Video res: 3840x2160 -->
                         <img src="/img/video-last-frame.webp" id="last-frame" width="4224" height="2376" 
@@ -109,13 +109,17 @@
                                x-bind:style="wrapperStyle" 
                                src="/video/website-prompter.webm" type="video/webm"></video>
                         <!-- TV Turn-On Effect Wrapper -->
-                        <div id="prompter-tv-wrapper" x-bind:style="placeholderStyle">
+                        <div id="prompter-tv-wrapper" x-bind:style="wasmStyle">
                             <!-- Scanline that appears first -->
                             <div class="tv-scanline"></div>
                             <!-- Glow overlay that expands -->
                             <div class="tv-glow"></div>
                             <!-- Reveal mask that clips the content -->
                             <div class="tv-reveal-mask">
+                                <!-- WASM preview image shown first -->
+                                <img src="/img/qprompt-wasm.webp" id="qprompt-wasm-image" 
+                                     class="absolute top-0 left-0 w-full opacity-0 pointer-events-none" 
+                                     style="transition: opacity 1.5s ease-in-out">
                                 <!-- WASM app will be injected here by qtloader -->
                             </div>
                         </div>
@@ -490,10 +494,10 @@
         fudgeX: initialParams.fudgeX || 0,
         fudgeY: initialParams.fudgeY || 0,
 
-        // Placeholder controls
-        placeholderScale: initialParams.placeholderScale || 1,
-        placeholderX: initialParams.placeholderX || 0,
-        placeholderY: initialParams.placeholderY || 0,
+        // WASM preview controls
+        wasmScale: initialParams.wasmScale || 1,
+        wasmX: initialParams.wasmX || 0,
+        wasmY: initialParams.wasmY || 0,
         
         get wrapperStyle() {
           // Calculate offsets based on scale so the prompter stays centered when zooming
@@ -509,9 +513,9 @@
           };
         },
 
-        get placeholderStyle() {
+        get wasmStyle() {
           return {
-            transform: `translate(${this.placeholderX}px, ${this.placeholderY}px) scale(${this.placeholderScale})`,
+            transform: `translate(${this.wasmX}px, ${this.wasmY}px) scale(${this.wasmScale})`,
             transition: 'opacity 1.5s ease-in-out, transform 0.3s ease-out'
           };
         }
@@ -523,6 +527,7 @@
       const screen = document.querySelector('#screen');
       const status = document.querySelector('#qtstatus');
       const video = document.querySelector('#top-video');
+      const wasmImage = document.querySelector('#qprompt-wasm-image');
       const lastFrame = document.querySelector('#last-frame');
       
       window.mobile = function() {
@@ -534,7 +539,6 @@
       const showVideo = () => {
         if (!window.mobile()) {
           video.style.opacity = 1;
-          // Placeholder stays hidden (via CSS) while video plays
         }
       };
 
@@ -542,6 +546,12 @@
       const showPrompterElements = () => {
         // Show last frame as background
         lastFrame.classList.remove("hidden");
+        
+        // Show the WASM preview image
+        if (wasmImage) {
+          wasmImage.classList.remove("opacity-0");
+          wasmImage.classList.add("opacity-100");
+        }
         
         // Get the TV wrapper and trigger the turn-on animation
         const tvWrapper = document.querySelector('#prompter-tv-wrapper');
