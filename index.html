@@ -109,9 +109,7 @@
                                x-bind:style="wrapperStyle" 
                                src="/video/website-prompter.webm" type="video/webm"></video>
                         <!-- TV Turn-On Effect Wrapper -->
-                        <div id="prompter-tv-wrapper">
-                            <img src="/img/qprompt-wasm.webp" id="placeholder-prompter" class="hidden lg:block absolute top-0 left-0 w-full"
-                                 x-bind:style="placeholderStyle">
+                        <div id="prompter-tv-wrapper" x-bind:style="placeholderStyle">
                         </div>
                         <div id="qtstatus"></div>
                     </div>
@@ -517,7 +515,6 @@
       const screen = document.querySelector('#screen');
       const status = document.querySelector('#qtstatus');
       const video = document.querySelector('#top-video');
-      const placeholder = document.querySelector('#placeholder-prompter');
       const lastFrame = document.querySelector('#last-frame');
       
       window.mobile = function() {
@@ -543,14 +540,6 @@
         if (tvWrapper) {
           tvWrapper.classList.add("tv-on");
         }
-        
-        // Show the WASM app container after TV animation completes
-        setTimeout(() => {
-          const appContainer = document.querySelector('#qt-shadow-container');
-          if (appContainer) {
-            appContainer.classList.add("show-app");
-          }
-        }, 600); // Delay to sync with TV animation
       };
 
       if (window.mobile()) {
@@ -572,7 +561,8 @@
       }
     
       // Start Loading WASM immediately but keep it hidden
-      loadWasm(screen, status);
+      const tvWrapper = document.querySelector('#prompter-tv-wrapper');
+      loadWasm(tvWrapper, status);
 
       // Parallax Background Logic
       window.addEventListener('scroll', () => {
@@ -609,6 +599,8 @@
           qt: {
             onLoaded: () => {
               console.log("WASM Loaded");
+              const appContainer = document.querySelector('#qt-shadow-container');
+              if (appContainer) appContainer.classList.add("show-app");
             },
             onExit: exitData => {
               status.innerHTML = 'QPrompt demo couldn\'t load' + (exitData.code !== undefined ? ` with code ${exitData.code}` : '');
