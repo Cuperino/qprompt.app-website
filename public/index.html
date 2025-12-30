@@ -89,10 +89,16 @@ section {
           <br>
           <a href="online" class="btn btn-lg btn-outline-secondary btn-sm mb-3">Try on Browser</a> -->
         </div>
-        <div id="screen" class="z-0 position-relative" style="margin-left: auto; margin-right: auto; margin-top: 6%;">
+        <div id="screen" class="z-0 position-relative" style="margin-left: auto; margin-right: auto; margin-top: 6%;" 
+             x-data="heroPrompter({ scale: 0.46 })">
           <!-- Video res: 3840x2160 -->
-          <img src="img/video-last-frame.webp" id="last-frame" width="4224" height="2376" class="position-absolute max-w-none origin-top-left" style="top: -230px; left: -590px; transform: scale(0.46); transform-origin: top left;">
-          <video id="top-video" width="4224" height="2376" autoplay muted playsinline class="position-absolute d-none max-w-none origin-top-left" style="top: -230px; left: -590px; transform: scale(0.46); transform-origin: top left;" src="video/website-prompter.webm" type="video/webm"></video>
+          <img src="img/video-last-frame.webp" id="last-frame" width="4224" height="2376" 
+               class="origin-top-left" 
+               x-bind:style="wrapperStyle">
+          <video id="top-video" width="4224" height="2376" autoplay muted playsinline 
+                 class="d-none origin-top-left" 
+                 x-bind:style="wrapperStyle" 
+                 src="video/website-prompter.webm" type="video/webm"></video>
           <img src="img/qprompt-wasm.webp" id="placeholder-prompter" class="position-absolute" width="100%">
           <div id="qtstatus"></div>
         </div>
@@ -562,6 +568,32 @@ section {
     // Global so we can check if it's already running
     let qtInstance = null;
 
+    // Alpine component for the hero prompter
+    document.addEventListener('alpine:init', () => {
+      Alpine.data('heroPrompter', (initialParams = {}) => ({
+        // The coordinates of the prompter within the original 4224x2376 video
+        baseX: 1282, 
+        baseY: 500,
+        scale: initialParams.scale || 0.46,
+        fudgeX: initialParams.fudgeX || 0,
+        fudgeY: initialParams.fudgeY || 0,
+        
+        get wrapperStyle() {
+          // Calculate offsets based on scale so the prompter stays centered when zooming
+          const left = -(this.baseX * this.scale) + this.fudgeX;
+          const top = -(this.baseY * this.scale) + this.fudgeY;
+          return {
+            position: 'absolute',
+            top: `${top}px`,
+            left: `${left}px`,
+            transform: `scale(${this.scale})`,
+            transformOrigin: 'top left',
+            maxWidth: 'none'
+          };
+        }
+      }));
+    });
+
     async function init()
     {
       const screen = document.querySelector('#screen');
@@ -641,5 +673,8 @@ section {
     <script src="js/bootstrap.min.js"></script>
     <script src="js/qprompt.js"></script>
     <script type="text/javascript" src="js/qtloader.js"></script>
+    <!-- Alpine.js and HTMX -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
   </body>
 </html>
