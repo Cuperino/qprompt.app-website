@@ -97,7 +97,7 @@
                 <div class="relative w-full max-w-5xl aspect-video">
                     <!-- The exact structure required by the logic -->
                     <div id="screen" class="z-0 relative mx-auto" 
-                         x-data="heroPrompter({ scale: 0.87, fudgeX: -32, fudgeY: 34 })"
+                         x-data="heroPrompter({ scale: 0.94, fudgeX: -13, fudgeY: 79 })"
                          style="margin-top: 6%;">
                         <!-- Video res: 3840x2160 -->
                         <img src="/img/video-last-frame.webp" id="last-frame" width="4224" height="2376" 
@@ -123,6 +123,22 @@
                                 <!-- WASM app will be injected here by qtloader -->
                             </div>
                         </div>
+
+                        <!-- WASM Loading Animation (Slow connections) -->
+                        <div id="wasm-loader" class="hidden absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-500 opacity-0 pointer-events-none" x-bind:style="wasmStyle">
+                            <div class="relative w-24 h-24 mb-6">
+                                <div class="absolute inset-0 border-4 border-brand-primary/20 rounded-full"></div>
+                                <div class="absolute inset-0 border-4 border-brand-primary border-t-transparent rounded-full animate-spin"></div>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <img src="/favicon.ico" alt="QPrompt" class="w-10 h-10 animate-pulse">
+                                </div>
+                            </div>
+                            <div class="text-center space-y-2">
+                                <div class="font-dyuthi text-2xl text-brand-primary tracking-widest uppercase animate-pulse">Loading QPrompt</div>
+                                <div id="wasm-progress-text" class="text-xs font-mono text-gray-400 uppercase tracking-tighter">Initializing core...</div>
+                            </div>
+                        </div>
+
                         <div id="qtstatus"></div>
 
                         <!-- Debug Alignment Panel (Activated with ?debug=1) -->
@@ -521,6 +537,20 @@
     <script type="text/javascript">
     // Global so we can check if it's already running
     let qtInstance = null;
+    let wasmLoaded = false;
+    let videoEnded = false;
+    let revealTriggered = false;
+
+    // DOM References (assigned in init)
+    let dom = {
+      screen: null,
+      status: null,
+      video: null,
+      wasmImage: null,
+      lastFrame: null,
+      wasmLoader: null,
+      wasmProgressText: null
+    };
 
     // Alpine component for the hero prompter
     document.addEventListener('alpine:init', () => {
@@ -608,77 +638,139 @@
       }));
     });
 
+    // Function to show the prompter elements with TV turn-on effect
+    function showPrompterElements() {
+      if (revealTriggered) return;
+      revealTriggered = true;
+
+      // Hide loader if visible
+      if (dom.wasmLoader) {
+        dom.wasmLoader.style.opacity = 0;
+        setTimeout(() => dom.wasmLoader.classList.add("hidden"), 500);
+      }
+
+      // Show last frame as background
+      if (dom.lastFrame) dom.lastFrame.classList.remove("hidden");
+      
+      // Show the WASM preview image
+      if (dom.wasmImage) {
+        dom.wasmImage.classList.remove("opacity-0");
+        dom.wasmImage.classList.add("opacity-100");
+      }
+      
+      // Get the TV wrapper and trigger the turn-on animation
+      const tvWrapper = document.querySelector('#prompter-tv-wrapper');
+      if (tvWrapper) {
+        // Phase 1: Show the scanline (horizontal bar)
+        tvWrapper.classList.add("tv-on");
+        
+        // Phase 2: After scanline appears, start vertical reveal
+        setTimeout(() => {
+          tvWrapper.classList.add("tv-reveal");
+        }, 400); // Match the scanline-appear animation duration
+        
+        // Phase 3: Mark as complete after reveal finishes
+        setTimeout(() => {
+          tvWrapper.classList.add("tv-complete");
+        }, 1400); // 400ms scanline + 1000ms reveal
+      }
+    }
+
+    function checkAndReveal() {
+      if (wasmLoaded && videoEnded) {
+        showPrompterElements();
+      } else if (videoEnded && !wasmLoaded) {
+        // Show the loading animation because video ended but WASM is slow
+        if (dom.wasmLoader) {
+          dom.wasmLoader.classList.remove("hidden");
+          // Trigger fade in next frame
+          requestAnimationFrame(() => {
+            dom.wasmLoader.classList.remove("opacity-0");
+            dom.wasmLoader.classList.add("opacity-100");
+          });
+        }
+      }
+    }
+
+    async function loadWasm(screen, status, onProgress) {
+      if (qtInstance) return;
+      try {
+        qtInstance = await qtLoad({
+          setStatus: (text) => {
+            console.log("Status: " + text);
+            if (onProgress) onProgress(text);
+          },
+          qt: {
+            onLoaded: () => {
+              console.log("WASM Loaded and ready");
+              wasmLoaded = true;
+              checkAndReveal();
+              // WASM is now inside the reveal mask - visibility handled by TV wrapper classes
+            },
+            onExit: exitData => {
+              status.innerHTML = 'QPrompt demo couldn\'t load' + (exitData.code !== undefined ? ` with code ${exitData.code}` : '');
+            },
+            entryFunction: window.qprompt_entry,
+            containerElements: [screen],
+          }
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
     async function init()
     {
-      const screen = document.querySelector('#screen');
-      const status = document.querySelector('#qtstatus');
-      const video = document.querySelector('#top-video');
-      const wasmImage = document.querySelector('#qprompt-wasm-image');
-      const lastFrame = document.querySelector('#last-frame');
+      dom.screen = document.querySelector('#screen');
+      dom.status = document.querySelector('#qtstatus');
+      dom.video = document.querySelector('#top-video');
+      dom.wasmImage = document.querySelector('#qprompt-wasm-image');
+      dom.lastFrame = document.querySelector('#last-frame');
+      dom.wasmLoader = document.querySelector('#wasm-loader');
+      dom.wasmProgressText = document.querySelector('#wasm-progress-text');
       
       window.mobile = function() {
         let check = false;
-        (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+        (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|get_file_path_relative_to_workspace_rootrim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
         return check;
       };
 
       const showVideo = () => {
         if (!window.mobile()) {
-          video.style.opacity = 1;
-        }
-      };
-
-      // Function to show the prompter elements with TV turn-on effect
-      const showPrompterElements = () => {
-        // Show last frame as background
-        lastFrame.classList.remove("hidden");
-        
-        // Show the WASM preview image
-        if (wasmImage) {
-          wasmImage.classList.remove("opacity-0");
-          wasmImage.classList.add("opacity-100");
-        }
-        
-        // Get the TV wrapper and trigger the turn-on animation
-        const tvWrapper = document.querySelector('#prompter-tv-wrapper');
-        if (tvWrapper) {
-          // Phase 1: Show the scanline (horizontal bar)
-          tvWrapper.classList.add("tv-on");
-          
-          // Phase 2: After scanline appears, start vertical reveal
-          setTimeout(() => {
-            tvWrapper.classList.add("tv-reveal");
-          }, 400); // Match the scanline-appear animation duration
-          
-          // Phase 3: Mark as complete after reveal finishes
-          setTimeout(() => {
-            tvWrapper.classList.add("tv-complete");
-          }, 1400); // 400ms scanline + 1000ms reveal
+          dom.video.style.opacity = 1;
         }
       };
 
       if (window.mobile()) {
         // On mobile: show static content immediately (no video)
-        video.style.display = "none";
+        dom.video.style.display = "none";
+        wasmLoaded = true;
+        videoEnded = true;
         showPrompterElements();
       }
       else if (navigator.userAgent.search("Firefox") !== -1) {
         // Firefox: just play video, placeholder stays hidden
-        video.style.opacity = 1;
+        dom.video.style.opacity = 1;
       }
       else {
         // Other browsers: show video when ready
-        if (video.readyState >= 2) {
+        if (dom.video.readyState >= 2) {
           showVideo();
         } else {
-          video.addEventListener("canplay", showVideo);
+          dom.video.addEventListener("canplay", showVideo);
         }
       }
     
       // Start Loading WASM immediately but keep it hidden
       // Load into the reveal mask so it gets clipped by the TV effect
       const revealMask = document.querySelector('#prompter-tv-wrapper .tv-reveal-mask');
-      loadWasm(revealMask, status);
+      loadWasm(revealMask, dom.status, (text) => {
+        if (dom.wasmProgressText) dom.wasmProgressText.innerText = text;
+        if (text === "Running...") {
+          wasmLoaded = true;
+          checkAndReveal();
+        }
+      });
 
       // Parallax Background Logic
       window.addEventListener('scroll', () => {
@@ -697,36 +789,16 @@
         }
       });
 
-      video.addEventListener("ended", () => {
+      dom.video.addEventListener("ended", () => {
+        videoEnded = true;
         // Fade out video 
-        video.style.opacity = 0;
+        dom.video.style.opacity = 0;
 
-        // When video ends, show the prompter elements
+        // Small delay to let the video fade out first before checking reveal
         setTimeout(() => {
-          showPrompterElements();
-        }, 500); // Small delay to let the video fade out first
+          checkAndReveal();
+        }, 500); 
       });
-    }
-
-    async function loadWasm(screen, status) {
-      if (qtInstance) return;
-      try {
-        qtInstance = await qtLoad({
-          qt: {
-            onLoaded: () => {
-              console.log("WASM Loaded and ready");
-              // WASM is now inside the reveal mask - visibility handled by TV wrapper classes
-            },
-            onExit: exitData => {
-              status.innerHTML = 'QPrompt demo couldn\'t load' + (exitData.code !== undefined ? ` with code ${exitData.code}` : '');
-            },
-            entryFunction: window.qprompt_entry,
-            containerElements: [screen],
-          }
-        });
-      } catch (e) {
-        console.error(e);
-      }
     }
     </script>
     

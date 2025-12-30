@@ -93,6 +93,8 @@ $btn-border-radius-lg: 50rem;
     height: 100%;
     overflow: hidden;
     border-radius: 0.5rem;
+    margin: 0 !important;
+    padding: 0 !important;
     /* Start completely hidden */
     opacity: 0;
     pointer-events: none;
@@ -109,6 +111,8 @@ $btn-border-radius-lg: 50rem;
     width: 100%;
     height: 100%;
     overflow: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
     /* Removed border-radius here to avoid double-clipping offsets */
     
     /* Start as thin horizontal line at center */
@@ -200,20 +204,8 @@ $btn-border-radius-lg: 50rem;
 /* Vertical reveal - expands from center line to full height */
 @keyframes vertical-reveal {
     0% {
-        clip-path: inset(49.5% 0 49.5% 0);
+        clip-path: inset(50% 0 50% 0);
         filter: brightness(2.5) saturate(0);
-    }
-    15% {
-        clip-path: inset(45% 0 45% 0);
-        filter: brightness(2) saturate(0.2);
-    }
-    40% {
-        clip-path: inset(30% 0 30% 0);
-        filter: brightness(1.5) saturate(0.5);
-    }
-    70% {
-        clip-path: inset(10% 0 10% 0);
-        filter: brightness(1.2) saturate(0.8);
     }
     100% {
         clip-path: inset(0% 0 0% 0);
@@ -288,6 +280,17 @@ $btn-border-radius-lg: 50rem;
     pointer-events: none;
 }
 
+/* WASM preview image shown first */
+#qprompt-wasm-image {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 /* Target the Qt WASM shadow container specifically to ensure it fills its parent */
 #qt-shadow-container,
 [id*="qt-shadow-container"] { 
@@ -302,24 +305,29 @@ $btn-border-radius-lg: 50rem;
         0 0 20px rgba(35, 187, 132, 0.15),
         0 0 40px rgba(58, 156, 210, 0.1);
     
-    /* Ensure it fills its parent exactly */
+    /* Force it to fill the #screen dimensions exactly */
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
 }
 
 /* Target the Qt WASM canvas specifically */
 #qt-window-canvas {
     transform-origin: top left !important;
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
     margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    outline: none !important;
 }
 
 /* Before WASM is loaded, hide it */
