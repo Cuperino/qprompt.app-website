@@ -97,7 +97,7 @@ section {
                x-bind:style="wrapperStyle">
           <video id="top-video" width="4224" height="2376" autoplay muted playsinline 
                  class="origin-top-left" 
-                 style="transition: opacity 1.0s ease-out; opacity: 0;"
+                 style="transition: opacity 1.5s ease-in-out; opacity: 0;"
                  x-bind:style="wrapperStyle" 
                  src="video/website-prompter.webm" type="video/webm"></video>
           <img src="img/qprompt-wasm.webp" id="placeholder-prompter" class="position-absolute" width="100%">
@@ -640,12 +640,12 @@ section {
         setTimeout(() => {
           placeholder.classList.remove("opacity-0");
           placeholder.classList.add("opacity-100");
-          placeholder.style.transition = "opacity 1.0s ease-in";
+          placeholder.style.transition = "opacity 1.5s ease-in-out";
           
           setTimeout(() => {
             const appContainer = document.querySelector('#qt-shadow-container');
             if (appContainer) {
-              appContainer.style.transition = "opacity 1.0s ease-in";
+              appContainer.style.transition = "opacity 1.5s ease-in-out";
               appContainer.classList.remove("opacity-0");
               appContainer.classList.add("opacity-75");
             }
