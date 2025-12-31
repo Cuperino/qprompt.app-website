@@ -708,6 +708,8 @@
     let videoEnded = false;
     let revealTriggered = false;
     let introVideoCleaned = false;
+    let isMobile = false;
+    let isHashLanding = false;
 
     // DOM References (assigned in init)
     let dom = {
@@ -767,39 +769,56 @@
       sync();
     }
 
-    function showPrompterApp() {
-      if (revealTriggered) return;
+    /**
+     * Unified reveal logic for the hero section.
+     * Handles transitions between video, placeholder, and WASM.
+     */
+    function revealHeroContent() {
+      if (revealTriggered && wasmLoaded) {
+          // If WASM just loaded but we already revealed placeholder, swap them
+          const appContainer = document.querySelector('#qt-shadow-container');
+          if (appContainer) {
+            dom.placeholder.style.opacity = "0";
+            setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
+            
+            appContainer.style.transition = "opacity 1.0s ease-in";
+            appContainer.style.opacity = "0.75";
+            startMonitorSync();
+          }
+          return;
+      }
+
+      if (!videoEnded || revealTriggered) return;
+
       revealTriggered = true;
       cleanupIntroVideo();
 
-      if (dom.placeholder) {
-        dom.placeholder.style.transition = "opacity 1.0s ease-in";
-        dom.placeholder.style.opacity = "0.75";
-      }
-      
-      // Show the WASM app container
-      setTimeout(() => {
-        try {
-          const appContainer = document.querySelector('#qt-shadow-container');
-          if (appContainer) {
-            appContainer.style.transition = "opacity 1.0s ease-in";
-            appContainer.style.opacity = "0.75";
-          }
-          if (dom.monitorScreen) {
-            dom.monitorScreen.style.transition = "opacity 1.0s ease-in";
-            dom.monitorScreen.style.opacity = "0.4";
-          }
-        } catch (e) {
-          console.log(e);
+      if (wasmLoaded) {
+        // Reveal WASM directly
+        const appContainer = document.querySelector('#qt-shadow-container');
+        if (appContainer) {
+          appContainer.style.transition = "opacity 1.0s ease-in";
+          appContainer.style.opacity = "0.75";
+          startMonitorSync();
         }
-      }, 20);
+        if (dom.placeholder) dom.placeholder.classList.add("hidden");
+      } else {
+        // WASM not ready, reveal placeholder as bridge
+        if (dom.placeholder) {
+          dom.placeholder.style.transition = "opacity 1.0s ease-in";
+          dom.placeholder.style.opacity = "0.75";
+          dom.placeholder.classList.remove("hidden");
+        }
+      }
+
+      if (dom.monitorScreen) {
+        dom.monitorScreen.style.transition = "opacity 1.0s ease-in";
+        dom.monitorScreen.style.opacity = "0.4";
+      }
     }
 
     function checkAndReveal() {
-      if (wasmLoaded && videoEnded) {
-        showPrompterApp();
-        startMonitorSync();
-      }
+      revealHeroContent();
     }
 
     function applyFixedVideoSize() {
@@ -856,31 +875,14 @@
     }
 
     function loadWasm(screen, status) {
-      if (qtInstance) return;
+      if (qtInstance || isMobile) return;
       
       const config = {
         qt: {
           onLoaded: () => {
             console.log("WASM Loaded and ready");
             wasmLoaded = true;
-            
-            setTimeout(() => {
-              try {
-                dom.placeholder.classList.add("hidden");
-                const appContainer = document.querySelector('#qt-shadow-container');
-                if (appContainer) {
-                  if (!dom.video.ended) {
-                    appContainer.style.transition = "opacity 1.0s ease-in";
-                  }
-                  appContainer.style.opacity = "0.75";
-                }
-                
-                // Mirror to monitor
-                startMonitorSync();
-              } catch (e) {
-                console.log(e);
-              }
-            }, 20);
+            revealHeroContent();
           },
           onExit: exitData => {
             status.innerHTML = 'QPrompt demo couldn\'t load';
@@ -895,10 +897,9 @@
       qtLoad(config).then(instance => {
         qtInstance = instance;
       }).catch(e => {
-        dom.placeholder.style.transition = "opacity 1.0s ease-in";
-        dom.placeholder.style.opacity = "0.75";
+        wasmLoaded = false;
+        revealHeroContent(); // Fallback to placeholder if WASM fails
         console.error(e);
-        console.error(e.stack);
       });
     }
 
@@ -922,62 +923,82 @@
         return check;
       };
 
-      if (window.mobile()) {
+      isMobile = window.mobile();
+      isHashLanding = window.location.hash && window.location.hash.length > 1;
+
+      if (isMobile) {
         dom.lastFrame.hidden = false;
         dom.video.classList.add("hidden");
-        wasmLoaded = true;
         videoEnded = true;
-        showPrompterApp();
-      }
-      else if (navigator.userAgent.search("Firefox") !== -1) {
-        dom.video.classList.remove("hidden");
-        dom.lastFrame.hidden = true;
-        dom.placeholder.style.opacity = "0";
+        wasmLoaded = false; // Never load WASM on mobile
+        revealHeroContent();
       }
       else {
-        dom.video.addEventListener("canplay", () => {
-          if (!window.mobile()) {
+        // Desktop logic
+        if (isHashLanding) {
+          videoEnded = true;
+          dom.video.classList.add("hidden");
+          loadWasm(dom.screen, dom.status);
+          revealHeroContent();
+        } else {
+          // Standard landing, play video
+          if (navigator.userAgent.search("Firefox") !== -1) {
             dom.video.classList.remove("hidden");
             dom.lastFrame.hidden = true;
-            dom.placeholder.style.opacity = "0";
           }
-        });
+          else {
+            dom.video.addEventListener("canplay", () => {
+              if (!isMobile) {
+                dom.video.classList.remove("hidden");
+                dom.lastFrame.hidden = true;
+              }
+            });
+          }
+          
+          loadWasm(dom.screen, dom.status);
+        }
       }
       
       // If the video starts playing, ensure no WebP placeholder is visible on top/behind it.
       dom.video.addEventListener("play", () => {
-        if (window.mobile()) return;
+        if (isMobile) return;
         dom.lastFrame.hidden = true;
         dom.placeholder.style.opacity = "0";
       });
       dom.video.addEventListener("playing", () => {
-        if (window.mobile()) return;
+        if (isMobile) return;
         dom.lastFrame.hidden = true;
         dom.placeholder.style.opacity = "0";
       });
-    
-      // Start Loading WASM immediately
-      loadWasm(dom.screen, dom.status);
 
-      dom.video.addEventListener("ended", () => {
+      // Video ending logic
+      const handleVideoEnd = () => {
+        if (videoEnded) return;
         videoEnded = true;
-        dom.placeholder.style.transition = "opacity 1.0s ease-in";
-        dom.placeholder.style.opacity = "0.75";
-        checkAndReveal();
+        revealHeroContent();
+      };
+
+      dom.video.addEventListener("ended", handleVideoEnd);
+
+      // Firefox fallback: sometimes "ended" doesn't fire correctly if the video is at the very end
+      dom.video.addEventListener("timeupdate", () => {
+        if (!videoEnded && dom.video.duration > 0 && dom.video.currentTime >= dom.video.duration - 0.1) {
+          handleVideoEnd();
+        }
       });
 
       dom.video.addEventListener("abort", () => {
+        if (isMobile) return;
         dom.video.classList.add("hidden");
         dom.lastFrame.hidden = false;
-        dom.placeholder.style.opacity = "0.75";
+        handleVideoEnd();
       });
 
       dom.video.addEventListener("error", () => {
+        if (isMobile) return;
         dom.video.classList.add("hidden");
         dom.lastFrame.hidden = false;
-        dom.placeholder.style.opacity = "0.75";
-        videoEnded = true;
-        checkAndReveal();
+        handleVideoEnd();
       });
 
       window.addEventListener('scroll', updateParallax);
