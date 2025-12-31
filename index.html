@@ -64,9 +64,6 @@
     <link href="/css/fontawesome.min.css" rel="stylesheet">
     <link href="/src/main.scss" rel="stylesheet">
     
-    <!-- Motion -->
-    <script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.js"></script>
-    
     <!-- Hero Section Critical Styles -->
     <style>
     #qt-shadow-container {
@@ -598,7 +595,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="text-gray-500 text-sm font-light" x-data="{ currentYear: new Date().getFullYear() }">
-                    &copy; 2021-<span x-text="currentYear">2026</span> Javier O. Cordero Pérez &bull; <span class="text-brand-primary">QPrompt Teleprompter</span>
+                    &copy; 2021-<span x-text="currentYear">2026</span> Javier O. Cordero Pérez & Contributors &bull; <span class="text-brand-primary">QPrompt Teleprompter</span>
                 </div>
                 
                 <div class="flex gap-6">
@@ -622,7 +619,7 @@
     <script src="/js/popper.min.js"></script> 
     <script src="/js/qprompt.js"></script>
     <script type="text/javascript" src="/js/qtloader.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="/js/alpine.js"></script>
 
     <!-- Essential Logic -->
     <script type="text/javascript">
@@ -631,6 +628,7 @@
     let wasmLoaded = false;
     let videoEnded = false;
     let revealTriggered = false;
+    let introVideoCleaned = false;
 
     // DOM References (assigned in init)
     let dom = {
@@ -648,9 +646,27 @@
       height: 583      // px
     };
 
+    function cleanupIntroVideo() {
+      if (introVideoCleaned) return;
+      introVideoCleaned = true;
+
+      try {
+        if (dom.video) {
+          dom.video.pause();
+          dom.video.removeAttribute('src'); // stop any further network loads
+          dom.video.load();                 // flush the now-empty source
+          dom.video.classList.add("hidden");
+        }
+        if (dom.lastFrame) dom.lastFrame.hidden = true;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     function showPrompterApp() {
       if (revealTriggered) return;
       revealTriggered = true;
+      cleanupIntroVideo();
 
       if (dom.placeholder) {
         dom.placeholder.style.transition = "opacity 1.0s ease-in";
@@ -866,7 +882,7 @@
     
     <!-- Animations Script -->
     <script type="module">
-        import { animate, inView, scroll } from "https://cdn.jsdelivr.net/npm/motion@10.16.2/+esm";
+        import { animate, inView, scroll } from "motion";
         
         // Scroll Animations for Feature Cards
         document.querySelectorAll(".feature-card").forEach((card, index) => {
