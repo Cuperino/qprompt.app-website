@@ -45,10 +45,11 @@ The output will be in the `dist/` directory.
 
 ## Vercel Deployment
 
-This project is configured for easy deployment on Vercel. 
+This project is configured for easy deployment on Vercel using `vercel.json`. 
 1. Push your code to GitHub/GitLab/Bitbucket.
 2. Import the project in Vercel.
-3. Vercel will automatically detect Vite and Bun, and apply the headers defined in `vercel.json`.
+3. Vercel will automatically detect Vite and Bun.
+4. The `vercel.json` file ensures that the required security headers (`COOP`, `COEP`) are applied to all routes, which is essential for the WASM module to function correctly.
 
 ## Custom Static Server
 
