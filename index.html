@@ -160,7 +160,7 @@
         </section>
 
         <!-- Downloads Section -->
-        <section id="downloads" class="py-24 relative overflow-hidden parallax-bg" style="background-image: url('/img/qprompt-wasm.webp'); background-size: cover; background-position: center;">
+        <section id="downloads" class="py-24 relative overflow-hidden parallax-bg" style="background-image: url('/img/qprompt-wasm.webp');">
             <!-- Overlay to make text readable -->
             <div class="absolute inset-0 bg-brand-dark/80 z-0"></div>
             
@@ -197,7 +197,7 @@
                 </div>
 
                 <!-- Download Cards Grid -->
-                <div class="grid grid-cols-1">
+                <div class="grid grid-cols-1 min-h-[520px] md:min-h-[420px]">
                     <!-- V2.0 -->
                     <div x-show="ver === '2.0'" 
                          x-transition:enter="transition ease-out duration-300"
@@ -933,23 +933,35 @@
         checkAndReveal();
       });
 
-      // Parallax Background Logic
-      const updateParallax = () => {
-        const parallax = document.querySelector('.parallax-bg');
-        if (parallax) {
-          const rect = parallax.getBoundingClientRect();
-          const winHeight = window.innerHeight;
-          if (rect.top < winHeight && rect.bottom > 0) {
-            const offset = winHeight - rect.top;
-            parallax.style.backgroundPositionY = `calc(50% + ${(offset - winHeight/2) * 0.4}px)`;
-          }
-        }
-      };
-
       window.addEventListener('scroll', updateParallax);
       window.addEventListener('resize', updateParallax);
       updateParallax(); // Initial call
     }
+
+    // Parallax Background Logic
+    function updateParallax() {
+      const parallax = document.querySelector('.parallax-bg');
+      if (parallax) {
+        const rect = parallax.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+        if (rect.top < winHeight && rect.bottom > 0) {
+          const offset = winHeight - rect.top;
+          // Reduced factor from 0.4 to 0.15 to match the reduced background-size zoom
+          parallax.style.backgroundPositionY = `calc(50% + ${(offset - winHeight/2) * 0.15}px)`;
+        }
+      }
+    }
+
+    // Initialize ResizeObserver for Parallax
+    document.addEventListener('DOMContentLoaded', () => {
+      const parallax = document.querySelector('.parallax-bg');
+      if (parallax && window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+          updateParallax();
+        });
+        ro.observe(parallax);
+      }
+    });
     </script>
     
     <!-- Animations Script -->

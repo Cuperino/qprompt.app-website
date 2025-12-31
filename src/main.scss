@@ -98,7 +98,10 @@ $btn-border-radius-lg: 50rem;
 .parallax-bg {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 130% auto; /* Larger size to allow for stronger parallax movement without showing edges */
+    background-size: 110% auto; /* Reduced from 160% to prevent excessive zoom */
+    @media (max-width: 768px) {
+        background-size: auto 110%; /* Reduced from 120% */
+    }
 }
 
 .no-js .parallax-bg {
