@@ -76,117 +76,6 @@ $btn-border-radius-lg: 50rem;
     height: calc(100vh - 130px);
 }
 
-/* ===== TV TURN-ON EFFECT ===== */
-/* 
- * This creates a CRT TV turn-on effect:
- * Phase 1: Horizontal scanline appears (bright glow)
- * Phase 2: Vertical expansion from center reveals the WASM app
- * Phase 3: Glow fades as full image is revealed
- */
-
-/* Container for the TV effect - clips the content during animation */
-#prompter-tv-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 0.5rem;
-    margin: 0 !important;
-    padding: 0 !important;
-    /* Start completely hidden */
-    opacity: 0;
-    pointer-events: none;
-    
-    /* Ensure it scales from top-left to match the background prompter */
-    transform-origin: top left !important;
-}
-
-/* The reveal mask - clips content vertically from center */
-#prompter-tv-wrapper .tv-reveal-mask {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    margin: 0 !important;
-    padding: 0 !important;
-    /* Removed border-radius here to avoid double-clipping offsets */
-    
-    /* Start as thin horizontal line at center */
-    clip-path: inset(50% 0 50% 0);
-}
-
-/* The scanline bar that appears first */
-#prompter-tv-wrapper .tv-scanline {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 4px;
-    transform: translateY(-50%);
-    background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(35, 187, 132, 0.4) 10%,
-        rgba(58, 156, 210, 0.9) 30%,
-        rgba(255, 255, 255, 1) 50%,
-        rgba(58, 156, 210, 0.9) 70%,
-        rgba(35, 187, 132, 0.4) 90%,
-        transparent 100%
-    );
-    opacity: 0;
-    z-index: 100;
-    box-shadow: 
-        0 0 10px 2px rgba(255, 255, 255, 0.8),
-        0 0 30px 8px rgba(35, 187, 132, 0.6),
-        0 0 60px 15px rgba(58, 156, 210, 0.4);
-    pointer-events: none;
-}
-
-/* CRT glow overlay that expands with the reveal */
-#prompter-tv-wrapper .tv-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: 0.5rem;
-    opacity: 0;
-    z-index: 50;
-    pointer-events: none;
-    transform-origin: center;
-    background: radial-gradient(
-        ellipse 100% 100% at 50% 50%,
-        rgba(35, 187, 132, 0.3) 0%,
-        rgba(58, 156, 210, 0.2) 40%,
-        transparent 70%
-    );
-}
-
-/* ===== ANIMATION STATES (Now handled by Motion One Timeline) ===== */
-
-/* Final state - clean revealed app */
-#prompter-tv-wrapper.tv-complete .tv-reveal-mask {
-    clip-path: inset(0% 0 0% 0);
-    filter: none;
-}
-
-#prompter-tv-wrapper.tv-complete .tv-scanline,
-#prompter-tv-wrapper.tv-complete .tv-glow {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* WASM preview image shown first */
-#qprompt-wasm-image {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: fill !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
 /* Target the Qt WASM shadow container specifically to ensure it fills its parent */
 #qt-shadow-container, 
 [id*="qt-shadow-container"] {
@@ -195,11 +84,6 @@ $btn-border-radius-lg: 50rem;
     pointer-events: auto !important;
     border-radius: 0.5rem;
     overflow: hidden;
-    /* Slight CRT screen curve effect */
-    box-shadow: 
-        inset 0 0 30px rgba(0, 0, 0, 0.3),
-        0 0 20px rgba(35, 187, 132, 0.15),
-        0 0 40px rgba(58, 156, 210, 0.1);
     
     /* Force it to fill the #screen dimensions exactly */
     position: absolute !important;
@@ -210,11 +94,6 @@ $btn-border-radius-lg: 50rem;
     padding: 0 !important;
     display: block !important;
     transition: opacity 0.5s ease-in-out;
-}
-
-#prompter-tv-wrapper.tv-on #qt-shadow-container,
-#prompter-tv-wrapper.tv-on [id*="qt-shadow-container"] {
-    opacity: 0.85;
 }
 
 /* Target the Qt WASM canvas specifically */
@@ -253,7 +132,26 @@ $btn-border-radius-lg: 50rem;
     line-height: 1.4 !important; /* Ensure readable line height for this decorative font */
 }
 
-/* Button beast mode override for 2px border */
+/* Global Button Enhancements */
+.btn {
+  border-width: 2px !important;
+  transition: all 0.3s ease;
+  
+  // Specific lighter border for primary buttons
+  &.btn-primary {
+    border-color: lighten($primary, 10%) !important;
+  }
+  
+  &.btn-info {
+    border-color: lighten($info, 10%) !important;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+}
+
 .btn-beast {
     border-width: 2px !important;
 }

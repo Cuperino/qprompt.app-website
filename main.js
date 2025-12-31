@@ -21,7 +21,8 @@ const mimeTypes = {
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
   '.pdf': 'application/pdf',
-  '.wasm': 'application/wasm'
+  '.wasm': 'application/wasm',
+  '.webm': 'video/webm'
 };
 
 const publicDir = path.resolve(__dirname, process.env.PUBLIC_DIR || 'dist');
