@@ -20,7 +20,7 @@
     "cue",
     "cuperino"
   ],
-  "license": "ISC",
+  "license": "CC-BY-4.0",
   "packageManager": "bun@1.2.0",
   "scripts": {
     "dev": "vite",
