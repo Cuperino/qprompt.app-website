@@ -115,6 +115,17 @@ $btn-border-radius-lg: 50rem;
     line-height: 1.4 !important; /* Ensure readable line height for this decorative font */
 }
 
+/* Gradient text with white fallback */
+.text-gradient-brand {
+    color: #ffffff; /* Fallback for browsers that don't support bg-clip-text */
+    
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+        @apply bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent;
+        /* Force color transparent only when bg-clip-text is supported */
+        color: transparent !important;
+    }
+}
+
 /* Feature Entry Animations */
 .feature-entry {
     opacity: 0;
