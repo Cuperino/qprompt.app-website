@@ -111,9 +111,16 @@ $btn-border-radius-lg: 50rem;
 
 /* Fonts for Logo and Branding */
 .font-dyuthi {
-    font-family: 'Dyuthi', Arial, sans-serif !important;
-    letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
-    line-height: 1.4 !important; /* Ensure readable line height for this decorative font */
+  font-family: 'Dyuthi', Arial, sans-serif !important;
+  letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
+  line-height: 1.4 !important; /* Ensure readable line height for this decorative font */
+}
+
+/* Font for app description */
+.font-garamond {
+  font-family: garamond, serif !important;
+  // letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
+  line-height: 1.2 !important; /* Ensure readable line height for this decorative font */
 }
 
 /* Gradient text with white fallback */
