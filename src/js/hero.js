@@ -64,37 +64,34 @@ function startMonitorSync() {
 }
 
 function revealHeroContent() {
-  if (revealTriggered && wasmLoaded) {
-    const appContainer = document.querySelector('#qt-shadow-container');
-    if (appContainer) {
-      dom.placeholder.style.opacity = '0';
-      setTimeout(() => dom.placeholder.classList.add('hidden'), 1000);
-
-      appContainer.style.transition = 'opacity 1.0s ease-in';
-      appContainer.style.opacity = '0.75';
-      startMonitorSync();
-    }
-    return;
-  }
-
-  if (!videoEnded || revealTriggered) return;
-
-  revealTriggered = true;
-  cleanupIntroVideo();
+  if (!videoEnded) return;
 
   const appContainer = document.querySelector('#qt-shadow-container');
 
   if (wasmLoaded) {
+    revealTriggered = true;
+
     if (appContainer) {
       appContainer.style.transition = 'opacity 1.0s ease-in';
       appContainer.style.opacity = '0.75';
       startMonitorSync();
     }
-    if (dom.placeholder) dom.placeholder.classList.add('hidden');
+
+    if (dom.placeholder) {
+      dom.placeholder.style.opacity = '0';
+      setTimeout(() => dom.placeholder.classList.add('hidden'), 200);
+    }
+
+    // Only once WASM is visible do we retire the video/last-frame.
+    setTimeout(() => cleanupIntroVideo(), 250);
   } else if (dom.placeholder) {
     dom.placeholder.style.transition = 'opacity 1.0s ease-in';
     dom.placeholder.style.opacity = '0.75';
     dom.placeholder.classList.remove('hidden');
+
+    // Keep the last frame visible as a fallback while waiting for WASM.
+    if (dom.lastFrame) dom.lastFrame.hidden = false;
+    if (dom.video) dom.video.classList.remove('hidden');
   }
 
   if (dom.monitorScreen) {
@@ -260,6 +257,7 @@ export async function init() {
     const handleVideoEnd = () => {
       if (videoEnded) return;
       videoEnded = true;
+      if (dom.lastFrame) dom.lastFrame.hidden = false;
       revealHeroContent();
     };
 
