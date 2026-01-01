@@ -241,6 +241,7 @@
                             <div class="flex flex-wrap justify-center gap-2">
                                 <button @click="ver = '2.0'" :class="ver === '2.0' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v2.0 (Stable)</button>
                                 <button @click="ver = '1.2'" :class="ver === '1.2' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v1.2 (Legacy)</button>
+                                <button @click="ver = 'other'" :class="ver === 'other' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">Other</button>
                             </div>
                         </div>
                         <div class="">
@@ -278,15 +279,16 @@
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <!-- <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Snap (x86_64)</a> -->
-                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Flatpak (x86_64, arm64)</a>
+                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30">
+                                            <i class="fas fa-download"></i> Flatpak (x86_64, arm64)
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
                                         <a href="#" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. plus RPi OS Trixie</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. and RPi OS Trixie</span>
                                         <a href="#" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
@@ -307,7 +309,7 @@
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest text-brand-primary">Apple Silicon</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">Optimized for M1, M2, M3, and later chips.</p> -->
-                                    <div class="mt-1">
+                                    <div class="flex flex-col gap-2 mt-2">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30">
                                             <i class="fas fa-download"></i> Download DMG (Apple Silicon)
                                         </a>
@@ -316,7 +318,7 @@
                                 <div class="pt-2 border-t border-white/10">
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors.</p> -->
-                                    <div class="mt-1">
+                                    <div class="mt-2">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
                                         </a>
@@ -338,7 +340,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 10 and later</span>
-                                    <div class="mt-3">
+                                    <div class="flex flex-col gap-2 mt-2">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
                                         </a>
@@ -370,14 +372,14 @@
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.AppImage/download" class="flex-1 text-center text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-2 rounded-lg transition-all font-bold border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download AppImage (x86_64)</a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.AppImage/download" class="flex-1 text-center text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download AppImage (x86_64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 11 / Ubuntu 22.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
-                                        <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. plus RPi OS Bullseye</span>
+                                        <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. and RPi OS Bullseye</span>
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-arm64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
@@ -395,10 +397,10 @@
                              x-transition:leave-end="opacity-0 scale-95">
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-apple text-white"></i> macOS</h4>
                             <div class="space-y-4">
-                                <div class="pt-2">
+                                <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors. Runs on Apple Silicon via Rosetta 2.</p> -->
-                                    <div class="mt-1">
+                                    <div class="flex flex-col gap-2 mt-2">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-macos-clang-x86_64.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
                                         </a>
@@ -420,7 +422,7 @@
                             <div class="space-y-4">
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 7 and later</span>
-                                    <div class="mt-3">
+                                    <div class="flex flex-col gap-2 mt-2">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-windows-cl-msvc2019-x86_64.exe/download" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
                                         </a>
@@ -430,6 +432,99 @@
                         </div>
                     </div>
                 </div>
+
+                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === 'other'">Downloads for Other QPrompt versions (early access and old builds)</h3>
+                <div class="grid grid-cols-1 min-h-[520px] md:min-h-[420px]" x-show="ver === 'other'">
+                    <!-- Other -->
+                    <div x-show="ver === 'other'"
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform scale-95"
+                         x-transition:enter-end="opacity-100 transform scale-100"
+                         x-cloak class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
+
+                         <!-- Early Access -->
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-download text-brand-accent"></i> Early Access</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Relatively stable beta builds for Windows, macOS and Linux</span>
+                                    <div class="flex flex-col gap-2 mt-2">
+                                        <a href="" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30"><i class="fas fa-download"></i> Download from Patreon posts</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Linux -->
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
+                             x-show="platform === 'all' || platform === 'linux'"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal, QPrompt 1.1.3</span>
+                                    <div class="flex flex-col gap-2 mt-2">
+                                        <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Snap (x86_64)</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Android -->
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-android text-brand-primary"></i> Android</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt 1.1.2</span>
+                                    <div class="flex flex-col gap-2 mt-2">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-v1.1.2-072f0a7-android-64-debug.apk/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
+                                            <i class="fas fa-download"></i> Download APK (arm64)
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Haiku OS -->
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
+                             x-transition:enter="transition ease-out duration-300"
+                             x-transition:enter-start="opacity-0 scale-95"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-globe"></i> Haiku OS</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt 1.1.2</span>
+                                    <div class="flex flex-col gap-2 mt-2">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-1.1.2-1-x86_64.hpkg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
+                                            <i class="fas fa-download"></i> Download .hpkg (x86_64)
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
