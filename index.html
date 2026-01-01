@@ -204,14 +204,14 @@
                 <!-- Filters -->
                 <div class="bg-white/10 border border-white/20 p-6 rounded-2xl max-w-4xl mx-auto mb-12 backdrop-blur-md">
                     <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-16">
-                        <div class="text-center">
+                        <div>
                             <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Version</label>
                             <div class="flex flex-wrap justify-center gap-2">
                                 <button @click="ver = '2.0'" :class="ver === '2.0' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v2.0 (Stable)</button>
                                 <button @click="ver = '1.2'" :class="ver === '1.2' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v1.2 (Legacy)</button>
                             </div>
                         </div>
-                        <div class="text-center">
+                        <div class="">
                             <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Platform</label>
                             <div class="flex flex-wrap justify-center gap-2">
                                 <button @click="platform = 'all'" :class="platform === 'all' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">All</button>
@@ -244,17 +244,17 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Universal</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Snap (x86_64)</a>
+                                        <!-- <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Snap (x86_64)</a> -->
                                         <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Flatpak (x86_64, arm64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
                                         <a href="#" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">The above ver. plus RPi OS Trixie</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. plus RPi OS Trixie</span>
                                         <a href="#" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                         </div>
 
                         <!-- macOS -->
-                        <div class="bg-white/15 border-2 border-white/20 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu" 
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
                              x-show="platform === 'all' || platform === 'macos'"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 scale-95"
@@ -273,8 +273,8 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-apple text-white"></i> macOS</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest text-brand-primary">Apple Silicon</span>
-                                    <p class="text-[10px] text-gray-400 mt-1 mb-2">Optimized for M1, M2, M3, and later chips.</p>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest text-brand-primary">Apple Silicon</span>
+                                    <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">Optimized for M1, M2, M3, and later chips.</p> -->
                                     <div class="mt-1">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30">
                                             <i class="fas fa-download"></i> Download DMG (Apple Silicon)
@@ -282,8 +282,8 @@
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Intel</span>
-                                    <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors.</p>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
+                                    <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors.</p> -->
                                     <div class="mt-1">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
@@ -294,7 +294,7 @@
                         </div>
 
                         <!-- Windows -->
-                        <div class="bg-white/15 border-2 border-white/20 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu" 
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
                              x-show="platform === 'all' || platform === 'windows'"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 scale-95"
@@ -305,7 +305,7 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-windows text-brand-accent"></i> Windows</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Windows 10 and later</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 10 and later</span>
                                     <div class="mt-3">
                                         <a href="#" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
@@ -325,7 +325,7 @@
                          x-transition:enter-end="opacity-100 transform scale-100"
                          x-cloak class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
                         <!-- Linux -->
-                        <div class="bg-white/15 border-2 border-white/20 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu" 
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
                              x-show="platform === 'all' || platform === 'linux'"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 scale-95"
@@ -336,16 +336,16 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Universal</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex gap-2 mt-2">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.AppImage/download" class="flex-1 text-center text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-2 rounded-lg transition-all font-bold border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download AppImage (x86_64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Debian 11 / Ubuntu 22.04</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 11 / Ubuntu 22.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
-                                        <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">The above ver. plus RPi OS Bullseye</span>
+                                        <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. plus RPi OS Bullseye</span>
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-arm64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
@@ -353,7 +353,7 @@
                         </div>
 
                         <!-- macOS -->
-                        <div class="bg-white/15 border-2 border-white/20 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu" 
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
                              x-show="platform === 'all' || platform === 'macos'"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 scale-95"
@@ -364,8 +364,8 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-apple text-white"></i> macOS</h4>
                             <div class="space-y-4">
                                 <div class="pt-2">
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Intel</span>
-                                    <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors. Runs on Apple Silicon via Rosetta 2.</p>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
+                                    <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors. Runs on Apple Silicon via Rosetta 2.</p> -->
                                     <div class="mt-1">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-macos-clang-x86_64.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
@@ -376,7 +376,7 @@
                         </div>
 
                         <!-- Windows -->
-                        <div class="bg-white/15 border-2 border-white/20 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu" 
+                        <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
                              x-show="platform === 'all' || platform === 'windows'"
                              x-transition:enter="transition ease-out duration-300"
                              x-transition:enter-start="opacity-0 scale-95"
@@ -387,7 +387,7 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-windows text-brand-accent"></i> Windows</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-400 uppercase font-bold tracking-widest">Windows 7 and later</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 7 and later</span>
                                     <div class="mt-3">
                                         <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-windows-cl-msvc2019-x86_64.exe/download" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
@@ -514,7 +514,7 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Licensed under the <a href="https://www.gnu.org/licenses/quick-guide-gplv3.html">GNU General Public License v3</a>, QPrompt is free to use for any purpose, including commercial use.</p>
+                        <p>Licensed under the <a href="https://www.gnu.org/licenses/quick-guide-gplv3.html" class="text-gray-100 underline">GNU General Public License v3</a>, QPrompt is free to use for any purpose, including commercial use.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
@@ -522,7 +522,7 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>QPrompt's custom made rich text editor allows you to open and copy-paste formatted text from popular office suites. If you have <a href="https://libreoffice.org/">LibreOffice</a> installed on your computer, QPrompt will leverage it in the background to open a wide variety of formats.</p>
+                        <p>QPrompt's custom made rich text editor allows you to open and copy-paste formatted text from popular office suites. If you have <a href="https://libreoffice.org/" class="text-gray-100 underline">LibreOffice</a> installed on your computer, QPrompt will leverage it in the background to open a wide variety of formats.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
@@ -530,7 +530,7 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Readers with dyslexia can greatly benefit from QPrompt thanks to the horizontal bars that highlight the reading area (our innovation, carried over from Imaginary Teleprompter), as well as the inclusion of the <a href="https://opendyslexic.org/">OpenDyslexic</a> font.</p>
+                        <p>Readers with dyslexia can greatly benefit from QPrompt thanks to the horizontal bars that highlight the reading area (our innovation, carried over from Imaginary Teleprompter), as well as the inclusion of the <a href="https://opendyslexic.org/" class="text-gray-100 underline">OpenDyslexic</a> font.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
@@ -538,7 +538,7 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Navigate quickly through your script with customizable keyboard shortcuts. Map these to match other devices that act as keyboard emulators, such as presentation clickers and Contour Shuttle Controllers. Use key mapping in combination with <a href="https://kdeconnect.kde.org/">KDE Connect’s</a> presentation mode to control the velocity through your phone.</p>
+                        <p>Navigate quickly through your script with customizable keyboard shortcuts. Map these to match other devices that act as keyboard emulators, such as presentation clickers and Contour Shuttle Controllers. Use key mapping in combination with <a href="https://kdeconnect.kde.org/" class="text-gray-100 underline">KDE Connect’s</a> presentation mode to control the velocity through your phone.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
@@ -550,11 +550,11 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>While nothing beats dedicated hardware for screen duplication. However QPrompt let's you prompt to multiple screens connected to your computer. For dedicated hardware for screen duplication, we recommend <a href="https://decimator.com/">Decimator</a>. We are not sponsored by them, but members of our community love their screen duplicators.</p>
+                        <p>While nothing beats dedicated hardware for screen duplication. However QPrompt let's you prompt to multiple screens connected to your computer. For dedicated hardware for screen duplication, we recommend <a href="https://decimator.com/" class="text-gray-100 underline">Decimator</a>. We are not sponsored by them, but members of our community love their screen duplicators.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Thanks to a worldwide community, QPrompt is available in many of the world's most commonly spoken languages. German, Portuguese, Spanish, French, Chinese, Czech, Ukranian and Russian have fairly complete translations. You can <a href="https://l10n.cuperino.com/">contribute translations</a> if you like.</p>
+                        <p>Thanks to a worldwide community, QPrompt is available in many of the world's most commonly spoken languages. German, Portuguese, Spanish, French, Chinese, Czech, Ukranian and Russian have fairly complete translations. You can <a href="https://l10n.cuperino.com/" class="text-gray-100 underline">contribute translations</a> if you like.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
@@ -562,7 +562,7 @@
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
                         <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Presently, due to the lack of support for the <a href="https://mosprotocol.com/">MOS</a> and <a href="https://docs.ndi.video/all/developing-with-ndi/introduction">NDI</a> protocols, QPrompt v2.0 is not recommended for use in traditional newsroom environments. If you're interested in supporting the development of these features, please reach out.</p>
+                        <p>Presently, due to the lack of support for the <a href="https://mosprotocol.com/" class="text-gray-100 underline">MOS</a> and <a href="https://docs.ndi.video/all/developing-with-ndi/introduction" class="text-gray-100 underline">NDI</a> protocols, QPrompt v2.0 is not recommended for use in traditional newsroom environments. If you're interested in supporting the development of these features, please reach out.</p>
                     </div>
                 </div>
             </div>
@@ -678,7 +678,7 @@
     <footer class="bg-brand-dark py-12 border-t border-white/10">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="text-gray-500 text-sm font-light" x-data="{ currentYear: new Date().getFullYear() }">
+                <div class="text-gray-400 text-sm font-light" x-data="{ currentYear: new Date().getFullYear() }">
                     &copy; 2020-<span x-text="currentYear">2026</span> Javier O. Cordero Pérez &amp; Contributors</div>
                 
                 <div class="flex gap-6">
@@ -688,7 +688,7 @@
                     <a href="https://t.me/imaginaryteleprompter" class="text-gray-400 hover:text-brand-primary transition-colors"><i class="fab fa-telegram text-xl"></i></a>
                 </div>
 
-                <div class="flex gap-4 text-xs text-gray-600">
+                <div class="flex gap-4 text-xs text-gray-400">
                     <a href="https://github.com/Cuperino/Signatures/blob/main/CLA.md" class="hover:text-white transition-colors">CLA</a>
                     <a href="https://github.com/Cuperino/QPrompt-Teleprompter/#code-of-conduct" class="hover:text-white transition-colors">CoC</a>
                     <a href="https://github.com/Cuperino/QPrompt-Teleprompter/blob/main/COPYING" class="hover:text-white transition-colors">QPrompt License</a>
