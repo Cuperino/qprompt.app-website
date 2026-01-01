@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>QPrompt Teleprompter</title>
-    <meta name="description" content="QPrompt is a professional-grade, open-source teleprompter software designed for creators. Experience high performance, ease of use, and smooth prompting on any device." />
-    <meta name="keywords" content="teleprompter, professional teleprompter, open source prompter, autocue, video production, creator tools, QPrompt, prompter app" />
+    <meta name="description" content="Quality teleprompter app aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
+    <meta name="keywords" content="teleprompter, autocue, professional teleprompter, open source, video production, creator tools, QPrompt, app, software" />
     <meta name="author" content="Javier O. Cordero Pérez" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://qprompt.app" />
@@ -14,15 +14,15 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://qprompt.app" />
-    <meta property="og:title" content="QPrompt Teleprompter - Professional & Open Source" />
-    <meta property="og:description" content="The prompter software for creators. High performance, open source, and works across all platforms." />
+    <meta property="og:title" content="QPrompt Teleprompter App" />
+    <meta property="og:description" content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
     <meta property="og:image" content="https://qprompt.app/img/qprompt-wasm.webp" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://qprompt.app" />
-    <meta property="twitter:title" content="QPrompt Teleprompter - Professional & Open Source" />
-    <meta property="twitter:description" content="The prompter software for creators. High performance, open source, and works across all platforms." />
+    <meta property="twitter:title" content="QPrompt Teleprompter App" />
+    <meta property="twitter:description" content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
     <meta property="twitter:image" content="https://qprompt.app/img/qprompt-wasm.webp" />
 
     <!-- Structured Data -->
@@ -80,7 +80,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
-                    <img src="/favicon.ico" alt="QPrompt" class="w-10 h-10 animate-pulse">
+                    <img src="/favicon.ico" alt="QPrompt Logo" class="w-10 h-10 animate-pulse">
                     <span class="font-dyuthi text-2xl text-white">QPrompt</span>
                 </div>
                 
@@ -215,9 +215,9 @@
                             <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Platform</label>
                             <div class="flex flex-wrap justify-center gap-2">
                                 <button @click="platform = 'all'" :class="platform === 'all' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">All</button>
-                                <button @click="platform = 'linux'" :class="platform === 'linux' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-linux"></i></button>
-                                <button @click="platform = 'macos'" :class="platform === 'macos' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-apple"></i></button>
-                                <button @click="platform = 'windows'" :class="platform === 'windows' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-windows"></i></button>
+                                <button @click="platform = 'linux'" :class="platform === 'linux' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-linux"></i><span class="hidden">Linux</span></button>
+                                <button @click="platform = 'macos'" :class="platform === 'macos' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-apple"></i><span class="hidden">macOS</span></button>
+                                <button @click="platform = 'windows'" :class="platform === 'windows' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-windows"></i><span class="hidden">Windows</span></button>
                             </div>
                         </div>
                     </div>
