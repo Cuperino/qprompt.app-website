@@ -112,8 +112,8 @@ $btn-border-radius-lg: 50rem;
 /* Fonts for Logo and Branding */
 .font-dyuthi {
   font-family: 'Dyuthi', Arial, sans-serif !important;
-  letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
-  line-height: 1.4 !important; /* Ensure readable line height for this decorative font */
+  letter-spacing: 0.05em;
+  line-height: 1; /* Removed !important and set to 1 to allow utility overrides and better centering */
 }
 
 /* Font for app description */
