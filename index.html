@@ -78,7 +78,7 @@
     <header>
         <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-brand-dark/90 backdrop-blur-md border-b border-white/10" x-data="{ mobileMenu: false }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-wrap items-center justify-between min-h-[5rem]">
+                <div class="flex flex-wrap items-center justify-center gap-x-6 md:gap-x-12 min-h-[5rem]">
                     <div class="flex-shrink-0 flex items-center gap-3 py-4">
                         <img src="/favicon.ico" alt="QPrompt Logo" class="w-10 h-10">
                         <span class="font-dyuthi text-2xl text-white">QPrompt</span>
@@ -796,6 +796,9 @@
             appContainer.style.transition = "opacity 1.0s ease-in";
             appContainer.style.opacity = "0.75";
             startMonitorSync();
+            
+            // Cleanup video once WASM is starting to become visible
+            setTimeout(cleanupIntroVideo, 500);
           }
           return;
       }
@@ -803,7 +806,6 @@
       if (!videoEnded || revealTriggered) return;
 
       revealTriggered = true;
-      cleanupIntroVideo();
 
       if (wasmLoaded) {
         // Reveal WASM directly
@@ -812,6 +814,8 @@
           appContainer.style.transition = "opacity 1.0s ease-in";
           appContainer.style.opacity = "0.75";
           startMonitorSync();
+          // Delay cleanup until WASM is partially visible to prevent flicker
+          setTimeout(cleanupIntroVideo, 500);
         }
         if (dom.placeholder) dom.placeholder.classList.add("hidden");
       } else {
@@ -820,6 +824,8 @@
           dom.placeholder.style.transition = "opacity 1.0s ease-in";
           dom.placeholder.style.opacity = "0.75";
           dom.placeholder.classList.remove("hidden");
+          // Delay cleanup until placeholder is partially visible
+          setTimeout(cleanupIntroVideo, 500);
         }
       }
 
@@ -987,6 +993,8 @@
       const handleVideoEnd = () => {
         if (videoEnded) return;
         videoEnded = true;
+        // Unhide the last-frame immediately to prevent flicker
+        if (dom.lastFrame) dom.lastFrame.hidden = false;
         revealHeroContent();
       };
 
