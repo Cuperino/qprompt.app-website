@@ -13,16 +13,96 @@ $btn-border-radius-lg: 50rem;
 // Import Bootstrap
 @import "bootstrap/scss/bootstrap";
 
+// Font Awesome Icons (via npm package)
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 // Tailwind imports
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @layer components {
   .btn-beast {
     @apply px-8 py-4 text-xl font-bold uppercase tracking-wider transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(35,187,132,0.5),0_0_40px_rgba(58,156,210,0.3)] active:scale-95 border-2 rounded-full;
   }
+
+  .nav-link {
+    @apply hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-base md:text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0;
+  }
+
+  .nav-cta {
+    @apply bg-white/10 hover:bg-brand-primary hover:text-white transition-all px-4 py-2 rounded-full text-sm md:text-[10px] lg:text-sm font-bold border-2 border-white/20;
+  }
+
+  .glass-card {
+    @apply p-8 bg-white/5 border-2 border-white/10 rounded-2xl backdrop-blur-md transition-all duration-300;
+  }
+
+  .download-card {
+    @apply glass-card min-w-[280px] flex-1 max-w-[350px] transform-gpu flex flex-col gap-4;
+  }
+
+  .glass-link {
+    @apply inline-flex w-full items-center justify-center gap-2 text-sm font-semibold rounded-lg transition-all border-2 px-3 py-3 text-center bg-white/5 border-white/15 text-white hover:bg-white/15 shadow-md;
+  }
+
+  .glass-link--primary {
+    @apply bg-brand-primary/30 border-brand-primary/50 text-white hover:bg-brand-primary hover:border-brand-primary shadow-lg;
+  }
+
+  .glass-link--accent {
+    @apply bg-brand-accent/30 border-brand-accent/50 text-white hover:bg-brand-accent hover:border-brand-accent shadow-lg;
+  }
+
+  .glass-link--ghost {
+    @apply bg-white/5 border-white/20 text-white hover:bg-white/15;
+  }
+
+  .glass-link--info {
+    @apply bg-brand-accent/25 border-brand-accent/40 text-white hover:bg-brand-accent;
+  }
+
+  .glass-link--neutral {
+    @apply bg-white/5 border-white/15 text-white hover:bg-white/15;
+  }
+
+  .filter-chip {
+    @apply px-4 py-2 rounded-lg transition-colors border-2 border-white/20 text-white;
+  }
+
+  .filter-chip--primary {
+    @apply bg-brand-primary text-white border-brand-primary/40;
+  }
+
+  .filter-chip--accent {
+    @apply bg-brand-accent text-white border-brand-accent/40;
+  }
+
+  .section-label {
+    @apply text-xs text-gray-300 uppercase font-bold tracking-widest;
+  }
+
+  .section-note {
+    @apply text-xs text-gray-300 uppercase font-bold tracking-widest;
+  }
+
+  .cta-pill {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 border-2 rounded-full font-semibold text-sm transition-all hover:translate-y-[-2px] bg-white/5 border-white/20 text-white hover:bg-white/15 shadow-md;
+  }
+
+  .cta-pill--primary {
+    @apply bg-brand-primary/30 border-brand-primary/60 text-white hover:bg-brand-primary hover:border-brand-primary shadow-lg;
+  }
+
+  .cta-pill--neutral {
+    @apply bg-white/5 border-white/20 text-white hover:bg-white/15;
+  }
+
+  .cta-pill--outline {
+    @apply px-6 py-2 bg-brand-primary/10 border-brand-primary text-brand-primary rounded-full text-xs hover:bg-brand-primary hover:text-white hover:border-brand-primary shadow-md;
+  }
 }
+
+@tailwind utilities;
 
 // Custom Font
 @font-face {
