@@ -70,10 +70,10 @@
     <!-- Navigation -->
     <header>
         <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-brand-dark/90 backdrop-blur-md border-b border-white/10" x-data="navigation">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-wrap items-center justify-between min-h-[5rem]">
-                    <div class="flex-shrink-0 flex items-center gap-3 py-4">
-                        <img src="/favicon.ico" alt="QPrompt Logo" class="w-10 h-10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="flex flex-wrap items-center justify-between min-h-[4rem]">
+                    <div class="flex-shrink-0 flex items-center gap-2 py-2">
+                        <img src="/favicon.ico" alt="QPrompt Logo" class="w-10 h-10 p-0">
                         <span class="font-dyuthi text-2xl text-white">QPrompt</span>
                     </div>
                     
@@ -122,7 +122,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="relative overflow-hidden bg-[#080904] flex flex-col pt-20" style="min-height: 100vh; max-height: 2869px;">
+        <section id="home" class="relative overflow-hidden bg-[#080904] flex flex-col pt-16" style="min-height: 100vh; max-height: 2869px;">
             <!-- Background Elements -->
             <div class="absolute inset-0 z-10 pointer-events-none">
                 <div class="absolute top-20 left-10 w-72 h-72 bg-brand-primary/15 rounded-full blur-[100px] animate-pulse"></div>
@@ -199,11 +199,12 @@
                 </div>
 
                 <!-- Filters -->
-                <div class="bg-white/10 border border-white/20 p-6 rounded-2xl max-w-4xl mx-auto mb-12 backdrop-blur-md">
-                    <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-16">
-                        <div>
-                            <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Version</label>
-                            <div class="flex flex-wrap justify-center gap-2">
+                <div class="bg-white/10 border border-white/20 p-6 rounded-2xl max-w-7xl mx-auto mb-12 backdrop-blur-md">
+                    <div class="flex flex-col lg:flex-row items-center justify-evenly gap-8 px-4">
+                        <!-- Version Group -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6">
+                            <label class="text-xs font-bold text-brand-primary uppercase tracking-[0.2em] whitespace-nowrap">Version</label>
+                            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-3">
                                 <template x-for="version in versions" :key="version.id">
                                     <button
                                         @click="setVersion(version.id)"
@@ -213,9 +214,14 @@
                                 </template>
                             </div>
                         </div>
-                        <div class="">
-                            <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Platform</label>
-                            <div class="flex flex-wrap justify-center gap-2">
+
+                        <!-- Decorative Separator for Desktop -->
+                        <div class="hidden lg:block w-px h-8 bg-white/10"></div>
+
+                        <!-- Platform Group -->
+                        <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6">
+                            <label class="text-xs font-bold text-brand-primary uppercase tracking-[0.2em] whitespace-nowrap">Platform</label>
+                            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center gap-3">
                                 <template x-for="filter in filters" :key="filter.id">
                                     <button
                                         @click="setPlatform(filter.id)"
@@ -250,15 +256,15 @@
                              x-transition:leave="transition ease-in duration-200"
                              x-transition:leave-start="opacity-100 scale-100"
                              x-transition:leave-end="opacity-0 scale-95">
-                                <h4 class="text-xl font-bold mb-4 flex items-center gap-2">
-                                    <i :class="`${card.icon} ${card.iconColor}`"></i>
+                                <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+                                    <i :class="`${card.icon} ${card.iconColor}`" class="p-0"></i>
                                     <span x-text="card.title"></span>
                                 </h4>
-                            <div class="space-y-4">
+                            <div class="space-y-3">
                                     <template x-for="(section, index) in card.sections" :key="section.title">
                                         <div :class="index > 0 ? 'pt-2 border-t border-white/10' : ''">
                                             <span class="section-label" x-text="section.title"></span>
-                                    <div class="flex flex-col gap-2 mt-2">
+                                    <div class="flex flex-col gap-2 mt-1">
                                                 <template x-for="link in section.links" :key="link.label">
                                                     <a :href="link.href"
                                                        class="glass-link"
@@ -269,7 +275,7 @@
                                                 </template>
                                     </div>
                                             <template x-if="section.notes && section.notes.length">
-                                                <div class="flex flex-col gap-1 mt-2">
+                                                <div class="flex flex-col gap-1 mt-1">
                                                     <template x-for="note in section.notes" :key="note">
                                                         <span class="section-note" x-text="note"></span>
                                                     </template>
