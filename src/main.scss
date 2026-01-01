@@ -119,8 +119,9 @@ $btn-border-radius-lg: 50rem;
 /* Font for app description */
 .font-garamond {
   font-family: garamond, serif !important;
-  // letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
+  letter-spacing: 0.05em; /* Increased spacing further to prevent clumping */
   line-height: 1.2 !important; /* Ensure readable line height for this decorative font */
+  text-shadow: 2px 2px 4px #000000;
 }
 
 /* Gradient text with white fallback */
