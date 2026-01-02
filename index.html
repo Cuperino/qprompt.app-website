@@ -840,11 +840,11 @@
     // Global so we can check if it's already running
     let qtInstance = null;
     let wasmLoaded = false;
-    let wasmFailed = false;
     let videoEnded = false;
     let revealTriggered = false;
     let introVideoCleaned = false;
     let isMobile = false;
+    let isHashLanding = false;
 
     // DOM References (assigned in init)
     let dom = {
@@ -910,13 +910,11 @@
      */
     function revealHeroContent() {
       if (revealTriggered && wasmLoaded) {
-          // If WASM just loaded but we already revealed placeholder/last-frame, swap them
+          // If WASM just loaded but we already revealed placeholder, swap them
           const appContainer = document.querySelector('#qt-shadow-container');
-          if (appContainer && appContainer.style.opacity < 0.1) {
-            if (dom.placeholder) {
-              dom.placeholder.style.opacity = "0";
-              setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
-            }
+          if (appContainer) {
+            dom.placeholder.style.opacity = "0";
+            setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
             
             appContainer.style.transition = "opacity 1.0s ease-in";
             appContainer.style.opacity = "0.75";
@@ -928,12 +926,7 @@
           return;
       }
 
-      // Don't reveal until video ends or is explicitly bypassed
       if (!videoEnded || revealTriggered) return;
-
-      // Desktop: wait for WASM to be ready before revealing, to avoid placeholder.
-      // If WASM failed, we'll proceed to show placeholder as fallback.
-      if (!isMobile && !wasmLoaded && !wasmFailed) return;
 
       revealTriggered = true;
 
@@ -949,7 +942,7 @@
         }
         if (dom.placeholder) dom.placeholder.classList.add("hidden");
       } else {
-        // WASM not ready or failed, or on mobile: reveal placeholder as bridge/fallback
+        // WASM not ready, reveal placeholder as bridge
         if (dom.placeholder) {
           dom.placeholder.style.transition = "opacity 1.0s ease-in";
           dom.placeholder.style.opacity = "0.75";
@@ -1046,7 +1039,6 @@
         qtInstance = instance;
       }).catch(e => {
         wasmLoaded = false;
-        wasmFailed = true;
         revealHeroContent(); // Fallback to placeholder if WASM fails
         console.error(e);
       });
@@ -1073,6 +1065,7 @@
       };
 
       isMobile = window.mobile();
+      isHashLanding = window.location.hash && window.location.hash.length > 1;
 
       if (isMobile) {
         dom.lastFrame.hidden = false;
@@ -1083,21 +1076,28 @@
       }
       else {
         // Desktop logic
-        // Standard landing, play video
-        if (navigator.userAgent.search("Firefox") !== -1) {
-          dom.video.classList.remove("hidden");
-          dom.lastFrame.hidden = true;
+        if (isHashLanding) {
+          videoEnded = true;
+          dom.video.classList.add("hidden");
+          loadWasm(dom.screen, dom.status);
+          revealHeroContent();
+        } else {
+          // Standard landing, play video
+          if (navigator.userAgent.search("Firefox") !== -1) {
+            dom.video.classList.remove("hidden");
+            dom.lastFrame.hidden = true;
+          }
+          else {
+            dom.video.addEventListener("canplay", () => {
+              if (!isMobile) {
+                dom.video.classList.remove("hidden");
+                dom.lastFrame.hidden = true;
+              }
+            });
+          }
+          
+          loadWasm(dom.screen, dom.status);
         }
-        else {
-          dom.video.addEventListener("canplay", () => {
-            if (!isMobile) {
-              dom.video.classList.remove("hidden");
-              dom.lastFrame.hidden = true;
-            }
-          });
-        }
-        
-        loadWasm(dom.screen, dom.status);
       }
       
       // If the video starts playing, ensure no WebP placeholder is visible on top/behind it.
