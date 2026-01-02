@@ -228,7 +228,7 @@
 
             <div class="container mx-auto px-4 relative z-10" x-data="{ ver: '2.0', platform: 'all' }">
                 <!-- <h2 class="font-dyuthi text-4xl text-center mb-12 uppercase">DOWNLOAD <span class="text-brand-accent">NOW</span></h2> -->
-                
+
                 <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-16">
                     <a href="https://sourceforge.net/projects/qprompt/files/latest/download" 
                        class="btn-beast bg-gradient-to-r from-brand-primary to-brand-accent text-white border-2 border-transparent hover:shadow-lg hover:shadow-brand-primary/50">
@@ -280,22 +280,18 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30">
-                                            <i class="fas fa-download"></i> Flatpak (x86_64, arm64)
-                                        </a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Linux.deb/download" class="text-center text-sm font-bold  bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download .deb (amd64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
-                                    <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Linux.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. and RPi OS Trixie</span>
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-arm64-Linux.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
+                                    <div class="mt-2">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-arm64-Linux.deb/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
-                            </div>
+                           </div>
                         </div>
 
                         <!-- macOS -->
@@ -313,7 +309,7 @@
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest text-brand-primary">Apple Silicon</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">Optimized for M1, M2, M3, and later chips.</p> -->
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Apple-macOS.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Apple-macOS.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Apple Silicon)
                                         </a>
                                     </div>
@@ -476,9 +472,12 @@
                             <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal, QPrompt 1.1.3</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> Snap (x86_64)</a>
+                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all text-center font-bold border-2 border-brand-primary/30">
+                                            <i class="fas fa-store"></i> QPrompt 1.1.6 Flatpak<br>(x86_64, arm64)
+                                        </a>
+                                        <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> QPrompt 1.1.3 Snap<br>(x86_64)</a>
                                     </div>
                                 </div>
                             </div>
