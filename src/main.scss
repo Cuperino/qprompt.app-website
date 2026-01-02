@@ -135,17 +135,17 @@ $btn-border-radius-lg: 50rem;
     }
 }
 
-/* Feature Entry Animations */
-.feature-entry {
+/* Feature Entry & Card Animations */
+.feature-entry, .feature-card {
     opacity: 0;
     transform: translateY(20px);
     transition: none; /* Motion One will handle the animation */
+    will-change: transform, opacity;
 }
 
-.checkmark {
-    display: inline-block;
-    opacity: 0;
-    transform: scale(0);
+.no-js .feature-entry, .no-js .feature-card {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Global Button Enhancements */
