@@ -909,20 +909,18 @@
      */
     function revealHeroContent() {
       if (revealTriggered && wasmLoaded) {
-          // If WASM just loaded but we already revealed placeholder, swap them
+        // If WASM just loaded but we already revealed placeholder, swap them
+        setTimeout(() => {
           const appContainer = document.querySelector('#qt-shadow-container');
-          if (appContainer) {
-            dom.placeholder.style.opacity = "0";
-            setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
-            
-            appContainer.style.transition = "opacity 1.0s ease-in";
-            appContainer.style.opacity = "0.75";
-            startMonitorSync();
-            
-            // Cleanup video once WASM is starting to become visible
-            setTimeout(cleanupIntroVideo, 500);
-          }
-          return;
+          console.log("appContainer", appContainer);
+          dom.placeholder.style.opacity = "0";
+          setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
+          appContainer.style.opacity = "0.75";
+
+          // Cleanup video once WASM is starting to become visible
+          setTimeout(cleanupIntroVideo, 500);
+        }, 20);
+        return;
       }
 
       if (!videoEnded || revealTriggered) return;
