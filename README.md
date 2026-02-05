@@ -4,13 +4,13 @@
 [![Runtime: Bun](https://img.shields.io/badge/Runtime-Bun-black?logo=bun)](https://bun.sh/)
 [![Build: Vite](https://img.shields.io/badge/Build-Vite-646CFF?logo=vite)](https://vitejs.dev/)
 
-The official website for **QPrompt**, the ultimate professional-grade teleprompter application. This project showcases a high-performance landing page featuring a live WebAssembly (WASM) demo of the prompter, built with modern web technologies.
+The official website for **QPrompt**, a teleprompter app for all video creators. Built with ease of use, productivity, control accuracy, and smooth performance in mind. This repo stores the project's landing page, featuring a WebAssembly (WASM) demo of the prompter.
 
 ## 🚀 Key Features
 
-- **Live WASM Demo:** Experience the prompter directly in your browser.
-- **Modern UI/UX:** Built with Tailwind CSS and Alpine.js for a smooth, responsive experience.
-- **High Performance:** Optimized assets and animations powered by Motion One.
+- **WASM Demo:** Experience the prompter directly in your browser.
+- **Modern UI/UX:** Built with Tailwind CSS and Alpine.js.
+- **High Performance:** Optimized assets and animations.
 - **Cross-Platform Downloads:** Easy access to all QPrompt versions across Linux, Windows, and macOS.
 
 ## 🛠 Technology Stack
@@ -25,7 +25,7 @@ The official website for **QPrompt**, the ultimate professional-grade teleprompt
 
 Detailed documentation is available in the [`/Documentation`](./Documentation) directory:
 
-- [**Architecture Overview**](./Documentation/Architecture.md): Deep dive into the project structure and technology choices.
+- [**Architecture Overview**](./Documentation/Architecture.md): Project structure and technology choices.
 - [**Setup and Installation**](./Documentation/Setup.md): Instructions for running the project locally.
 - [**WASM Integration**](./Documentation/WASM-Integration.md): Technical details on how the QPrompt core runs in the browser.
 - [**Development Guide**](./Documentation/Development.md): Guidelines for contributors and UI modifications.
@@ -34,9 +34,9 @@ Detailed documentation is available in the [`/Documentation`](./Documentation) d
 
 ### Prerequisites
 
-We recommend using [Bun](https://bun.sh/) for the best development experience.
+An installation of [Bun](https://bun.sh/) is needed for local development.
 
-### Installation
+### Setup
 
 ```bash
 bun install
@@ -51,7 +51,7 @@ bun run dev
 ```
 The site will be available at `http://localhost:8000`.
 
-### Production Server (with WASM headers)
+### Test Server (with WASM headers)
 
 To serve the site with the specific security headers required for WebAssembly:
 
