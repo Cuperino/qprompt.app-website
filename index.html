@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QPrompt Teleprompter</title>
-    <meta name="description" content="Quality teleprompter app aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
-    <meta name="keywords" content="teleprompter, autocue, professional teleprompter, open source, video production, creator tools, QPrompt, app, software" />
+    <meta name="description"
+        content="Quality teleprompter app aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
+    <meta name="keywords"
+        content="teleprompter, autocue, professional teleprompter, open source, video production, creator tools, QPrompt, app, software" />
     <meta name="author" content="Javier O. Cordero Pérez" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://qprompt.app" />
@@ -15,14 +18,16 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://qprompt.app" />
     <meta property="og:title" content="QPrompt Teleprompter App" />
-    <meta property="og:description" content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
+    <meta property="og:description"
+        content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
     <meta property="og:image" content="https://qprompt.app/img/qprompt-wasm.webp" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://qprompt.app" />
     <meta property="twitter:title" content="QPrompt Teleprompter App" />
-    <meta property="twitter:description" content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
+    <meta property="twitter:description"
+        content="Quality teleprompter software aimed at solving the needs of teleprompter operators and content creators working individually or in small teams." />
     <meta property="twitter:image" content="https://qprompt.app/img/qprompt-wasm.webp" />
 
     <!-- Structured Data -->
@@ -54,151 +59,183 @@
       ]
     }
     </script>
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap"
+        rel="stylesheet">
+
     <!-- Styles -->
     <link href="/css/fontawesome.min.css" rel="stylesheet">
     <link href="/src/main.scss" rel="stylesheet">
-    
+
     <!-- Hero Section Critical Styles -->
     <style>
-    #qt-shadow-container {
-      opacity: 0.0;
-    }
+        #qt-shadow-container {
+            opacity: 0.0;
+        }
     </style>
 </head>
+
 <body class="bg-brand-dark text-white font-sans overflow-x-hidden antialiased no-js" onload="init()">
     <script>document.body.classList.remove('no-js');</script>
 
     <!-- Navigation -->
     <header>
-        <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-brand-dark/90 backdrop-blur-md border-b border-white/10" x-data="{ mobileMenu: false }">
+        <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-brand-dark/90 backdrop-blur-md border-b border-white/10"
+            x-data="{ mobileMenu: false }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between min-h-[5rem] relative">
                     <!-- Left: Brand -->
                     <div class="flex-shrink-0">
                         <a href="#home" class="flex items-center gap-3 no-underline group">
-                            <img src="/favicon.ico" alt="QPrompt Logo" class="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:scale-110">
+                            <img src="/favicon.ico" alt="QPrompt Logo"
+                                class="w-8 h-8 md:w-10 md:h-10 transition-transform group-hover:scale-110">
                             <span class="font-dyuthi text-xl md:text-2xl text-white leading-none">QPrompt</span>
                         </a>
                     </div>
-                    
+
                     <!-- Center: Navigation Links (Desktop) -->
                     <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center">
                         <ul class="flex md:flex-row items-center gap-1 lg:gap-4 xl:gap-8">
-                            <li><a href="#home" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Home</a></li>
-                            <li><a href="#about" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">About</a></li>
-                            <li><a href="#downloads" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Download</a></li>
-                            <li><a href="#community" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 whitespace-nowrap leading-none">Community</a></li>
-                            <li><a href="#reasons" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Reasons</a></li>
-                            <li><a href="#support" class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Support</a></li>
+                            <li><a href="#home"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Home</a>
+                            </li>
+                            <li><a href="#about"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">About</a>
+                            </li>
+                            <li><a href="#downloads"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Download</a>
+                            </li>
+                            <li><a href="#community"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 whitespace-nowrap leading-none">Community</a>
+                            </li>
+                            <li><a href="#reasons"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Reasons</a>
+                            </li>
+                            <li><a href="#support"
+                                    class="hover:text-brand-primary transition-colors px-3 py-2 rounded-md text-xs lg:text-sm font-medium border-2 border-transparent hover:border-brand-primary/30 md:border-0 leading-none">Support</a>
+                            </li>
                         </ul>
                     </div>
 
                     <!-- Right: Dev Blog (Desktop) & Mobile Toggle -->
                     <div class="flex items-center gap-4">
                         <div class="hidden md:block">
-                            <a href="https://www.patreon.com/qpromptapp" target="_blank" 
-                               class="inline-block bg-white/10 hover:bg-brand-primary hover:text-white transition-all px-4 py-2 rounded-full text-[10px] lg:text-sm font-bold border-2 border-white/20 whitespace-nowrap leading-none">
-                               Dev Blog
+                            <a href="https://www.patreon.com/qpromptapp" target="_blank"
+                                class="inline-block bg-white/10 hover:bg-brand-primary hover:text-white transition-all px-4 py-2 rounded-full text-[10px] lg:text-sm font-bold border-2 border-white/20 whitespace-nowrap leading-none">
+                                Dev Blog
                             </a>
                         </div>
-                        
+
                         <!-- Mobile Menu Button -->
                         <div class="md:hidden">
-                            <button @click="mobileMenu = !mobileMenu" 
-                                    :aria-expanded="mobileMenu"
-                                    aria-controls="mobile-menu"
-                                    aria-label="Toggle mobile menu"
-                                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none border-2 border-white/10">
+                            <button @click="mobileMenu = !mobileMenu" :aria-expanded="mobileMenu"
+                                aria-controls="mobile-menu" aria-label="Toggle mobile menu"
+                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none border-2 border-white/10">
                                 <i class="fas fa-bars text-xl"></i>
                             </button>
                         </div>
                     </div>
 
                     <!-- Unified Mobile Menu -->
-                    <div id="mobile-menu" 
-                         x-show="mobileMenu"
-                         x-transition:enter="transition ease-out duration-200"
-                         x-transition:enter-start="opacity-0 -translate-y-2"
-                         x-transition:enter-end="opacity-100 translate-y-0"
-                         x-transition:leave="transition ease-in duration-150"
-                         x-transition:leave-start="opacity-100 translate-y-0"
-                         x-transition:leave-end="opacity-0 -translate-y-2"
-                         class="fixed inset-x-0 top-[5rem] bg-brand-dark/95 backdrop-blur-md border-b border-white/10 p-4 md:hidden" 
-                         style="display: none;">
+                    <div id="mobile-menu" x-show="mobileMenu" x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-2"
+                        class="fixed inset-x-0 top-[5rem] bg-brand-dark/95 backdrop-blur-md border-b border-white/10 p-4 md:hidden"
+                        style="display: none;">
                         <ul class="flex flex-col items-center gap-4">
-                            <li><a href="#home" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Home</a></li>
-                            <li><a href="#about" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">About</a></li>
-                            <li><a href="#downloads" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Download</a></li>
-                            <li><a href="#contribute" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10 whitespace-nowrap">Contribute</a></li>
-                            <li><a href="#features" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Features</a></li>
-                            <li><a href="#community" @click="mobileMenu = false" class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Support</a></li>
+                            <li><a href="#home" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Home</a>
+                            </li>
+                            <li><a href="#about" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">About</a>
+                            </li>
+                            <li><a href="#downloads" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Download</a>
+                            </li>
+                            <li><a href="#contribute" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10 whitespace-nowrap">Contribute</a>
+                            </li>
+                            <li><a href="#features" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Features</a>
+                            </li>
+                            <li><a href="#community" @click="mobileMenu = false"
+                                    class="block w-full text-center hover:text-brand-primary transition-colors px-4 py-2 rounded-md text-lg font-medium border-2 border-white/10">Support</a>
+                            </li>
                             <li>
-                                <a href="https://www.patreon.com/qpromptapp" target="_blank" @click="mobileMenu = false" 
-                                   class="block w-full text-center bg-white/10 hover:bg-brand-primary hover:text-white transition-all px-6 py-3 rounded-full text-lg font-bold border-2 border-white/20 whitespace-nowrap">
-                                   Dev Blog
+                                <a href="https://www.patreon.com/qpromptapp" target="_blank" @click="mobileMenu = false"
+                                    class="block w-full text-center bg-white/10 hover:bg-brand-primary hover:text-white transition-all px-6 py-3 rounded-full text-lg font-bold border-2 border-white/20 whitespace-nowrap">
+                                    Dev Blog
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-                </div>
+            </div>
             </div>
         </nav>
     </header>
 
     <main>
         <!-- Hero Section -->
-        <section id="home" class="relative overflow-hidden bg-[#080904] flex flex-col pt-20" style="min-height: 100vh; max-height: 2869px;">
+        <section id="home" class="relative overflow-hidden bg-[#080904] flex flex-col pt-20"
+            style="min-height: 100vh; max-height: 2869px;">
             <!-- Background Elements -->
             <div class="absolute inset-0 z-10 pointer-events-none">
-                <div class="absolute top-20 left-10 w-72 h-72 bg-brand-primary/15 rounded-full blur-[100px] animate-pulse"></div>
-                <div class="absolute bottom-10 left-20 w-96 h-96 bg-brand-accent/15 rounded-full blur-[100px] animate-pulse" style="animation-delay: 0.5s;"></div>
+                <div
+                    class="absolute top-20 left-10 w-72 h-72 bg-brand-primary/15 rounded-full blur-[100px] animate-pulse">
+                </div>
+                <div class="absolute bottom-10 left-20 w-96 h-96 bg-brand-accent/15 rounded-full blur-[100px] animate-pulse"
+                    style="animation-delay: 0.5s;"></div>
             </div>
 
-            <div class="flex flex-col md:flex-row md:justify-evenly items-center md:items-center flex-grow px-4 gap-8 justify-center md:py-0 py-6 relative">
+            <div
+                class="flex flex-col md:flex-row md:justify-evenly items-center md:items-center flex-grow px-4 gap-8 justify-center md:py-0 py-6 relative">
                 <!-- Text Content -->
                 <div class="text-center z-20 max-w-md flex flex-col md:justify-center">
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight font-dyuthi text-white">
                         <span class="text-gradient-brand">QPrompt</span><br>Teleprompter App
                     </h1>
-                    <p class="text-lg text-gray-400 mt-3">Made for productivity, ease of use<br>&amp; smooth performance</p>
+                    <p class="text-lg text-gray-400 mt-3">Made for productivity, ease of use<br>&amp; smooth performance
+                    </p>
                     <div class="mt-5">
-                        <a href="#downloads" class="inline-block px-6 py-2 text-base font-bold border-2 border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all">
+                        <a href="#downloads"
+                            class="inline-block px-6 py-2 text-base font-bold border-2 border-brand-primary text-brand-primary rounded-lg hover:bg-brand-primary hover:text-white transition-all">
                             Go to Downloads
                         </a>
                     </div>
                 </div>
 
                 <!-- Prompter Screen -->
-                <div id="screen" class="relative" style="min-width: 351px; min-height: 351px; max-width: 1016px; max-height: 583px; width: 100vw; height: calc(100vh - 160px);">
+                <div id="screen" class="relative"
+                    style="min-width: 351px; min-height: 351px; max-width: 1016px; max-height: 583px; width: 100vw; height: calc(100vh - 160px);">
                     <!-- Video res: 3840x2160 -->
                     <img src="/img/video-last-frame.webp" id="last-frame" width="4224" height="2376" hidden
-                         class="absolute max-w-none z-0" 
-                         style="top: -503px; left: -1520px;">
+                        class="absolute max-w-none z-0" style="top: -503px; left: -1520px;">
                     <video id="top-video" width="4224" height="2376" autoplay muted playsinline
-                           class="absolute max-w-none z-0"
-                           style="top: -503px; left: -1520px;"
-                           src="/video/website-prompter.webm" type="video/webm"></video>
-                    <img src="/img/qprompt-wasm.webp" id="placeholder-prompter" class="absolute w-full z-20" style="opacity: 0;">
+                        class="absolute max-w-none z-0" style="top: -503px; left: -1520px;"
+                        src="/video/website-prompter.webm" type="video/webm"></video>
+                    <img src="/img/qprompt-wasm.webp" id="placeholder-prompter" class="absolute w-full z-20"
+                        style="opacity: 0;">
                     <div id="qtstatus" class="relative z-20"></div>
-                    
+
                     <!-- Physical Monitor Reflection (The "Monitor" that is usually off) -->
-                    <div id="monitor-screen" class="absolute w-full h-full opacity-0 pointer-events-none z-20" 
-                         style="top: 590px; left: 0; transform: scaleY(-1); filter: blur(3px) brightness(0.5);">
+                    <div id="monitor-screen" class="absolute w-full h-full opacity-0 pointer-events-none z-20"
+                        style="top: 590px; left: 0; transform: scaleY(-1); filter: blur(3px) brightness(0.5);">
                         <canvas id="monitor-canvas" class="w-full h-full"></canvas>
                     </div>
                 </div>
             </div>
 
             <div class="relative block text-center">
-                <a href="#features" class="inline-block my-4 px-6 py-2 border-2 border-white/30 text-white rounded-lg hover:bg-white/10 transition-all align-middle">
+                <a href="#features"
+                    class="inline-block my-4 px-6 py-2 border-2 border-white/30 text-white rounded-lg hover:bg-white/10 transition-all align-middle">
                     &darr; Why use QPrompt &darr;
                 </a>
             </div>
@@ -206,23 +243,29 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="py-24 bg-brand-dark border-t border-white/5 relative overflow-hidden" style="background-image: url('/img/photo_2025-12-19_15-05-24.jpg'); background-position: center; background-size: cover;">
+        <section id="about" class="py-24 bg-brand-dark border-t border-white/5 relative overflow-hidden"
+            style="background-image: url('/img/photo_2025-12-19_15-05-24.jpg'); background-position: center; background-size: cover;">
             <div class="absolute inset-0 bg-brand-dark/80 z-0"></div>
             <div class="container mx-auto px-4">
                 <div class="text-center max-w-4xl mx-auto">
-                    <h2 class="font-dyuthi text-4xl mb-12 uppercase">About <span class="text-brand-primary">QPrompt</span></h2>
+                    <h2 class="font-dyuthi text-4xl mb-12 uppercase">About <span
+                            class="text-brand-primary">QPrompt</span></h2>
                     <p class="text-2xl md:text-3xl font-light leading-relaxed text-gray-300 font-garamond">
-                        QPrompt is a high-quality, feature-rich, open source teleprompter app, made with productivity and smooth performance in mind. It aims to solve the needs of teleprompter operators working in the events industry and of video content creators working individually or in small teams.
+                        QPrompt is a high-quality, feature-rich, open source teleprompter app, made with productivity
+                        and smooth performance in mind. It aims to solve the needs of teleprompter operators working in
+                        the events industry and of video content creators working individually or in small teams.
                     </p>
                 </div>
             </div>
             <div class="absolute bottom-10 right-10 text-gray-600">
-                <a href="https://qprompt.app/img/photo_2025-12-19_15-05-24.jpg">Video World</a> © 2024 by Videosmith is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
+                <a href="https://qprompt.app/img/photo_2025-12-19_15-05-24.jpg">Video World</a> © 2024 by Videosmith is
+                licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>
             </div>
         </section>
 
         <!-- Downloads Section -->
-        <section id="downloads" class="py-24 relative overflow-hidden parallax-bg" style="background-image: url('/img/qprompt-wasm.webp');">
+        <section id="downloads" class="py-24 relative overflow-hidden parallax-bg"
+            style="background-image: url('/img/qprompt-wasm.webp');">
             <!-- Overlay to make text readable -->
             <div class="absolute inset-0 bg-brand-dark/80 z-0"></div>
 
@@ -230,86 +273,115 @@
                 <!-- <h2 class="font-dyuthi text-4xl text-center mb-12 uppercase">DOWNLOAD <span class="text-brand-accent">NOW</span></h2> -->
 
                 <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-16">
-                    <a href="https://sourceforge.net/projects/qprompt/files/latest/download" 
-                       class="btn-beast bg-gradient-to-r from-brand-primary to-brand-accent text-white border-2 border-transparent hover:shadow-lg hover:shadow-brand-primary/50">
-                       <i class="fas fa-download mr-2 text-center"></i> Auto-Detect Download
+                    <a href="https://sourceforge.net/projects/qprompt/files/latest/download"
+                        class="btn-beast bg-gradient-to-r from-brand-primary to-brand-accent text-white border-2 border-transparent hover:shadow-lg hover:shadow-brand-primary/50">
+                        <i class="fas fa-download mr-2 text-center"></i> Auto-Detect Download
                     </a>
                 </div>
 
                 <!-- Filters -->
-                <div class="bg-white/10 border border-white/20 p-6 rounded-2xl max-w-4xl mx-auto mb-12 backdrop-blur-md">
+                <div
+                    class="bg-white/10 border border-white/20 p-6 rounded-2xl max-w-4xl mx-auto mb-12 backdrop-blur-md">
                     <div class="flex flex-col md:flex-row justify-center items-center md:items-start gap-8 md:gap-16">
                         <div>
-                            <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Version</label>
+                            <label
+                                class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Version</label>
                             <div class="flex flex-wrap justify-center gap-2">
-                                <button @click="ver = '2.0'" :class="ver === '2.0' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v2.0 (Stable)</button>
-                                <button @click="ver = '1.2'" :class="ver === '1.2' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">v1.2 (Legacy)</button>
-                                <button @click="ver = 'other'" :class="ver === 'other' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">Other</button>
+                                <button @click="ver = '2.0'"
+                                    :class="ver === '2.0' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors">v2.0 (Stable)</button>
+                                <button @click="ver = '1.2'"
+                                    :class="ver === '1.2' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors">v1.2 (Legacy)</button>
+                                <button @click="ver = 'other'"
+                                    :class="ver === 'other' ? 'bg-brand-primary text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors">Other</button>
                             </div>
                         </div>
                         <div class="">
-                            <label class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Platform</label>
+                            <label
+                                class="block text-sm font-bold mb-3 text-brand-primary uppercase tracking-widest">Platform</label>
                             <div class="flex flex-wrap justify-center gap-2">
-                                <button @click="platform = 'all'" :class="platform === 'all' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors">All</button>
-                                <button @click="platform = 'linux'" :class="platform === 'linux' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-linux"></i><span class="hidden">Linux</span></button>
-                                <button @click="platform = 'macos'" :class="platform === 'macos' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-apple"></i><span class="hidden">macOS</span></button>
-                                <button @click="platform = 'windows'" :class="platform === 'windows' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'" class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-windows"></i><span class="hidden">Windows</span></button>
+                                <button @click="platform = 'all'"
+                                    :class="platform === 'all' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors">All</button>
+                                <button @click="platform = 'linux'"
+                                    :class="platform === 'linux' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-linux"></i><span
+                                        class="hidden">Linux</span></button>
+                                <button @click="platform = 'macos'"
+                                    :class="platform === 'macos' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-apple"></i><span
+                                        class="hidden">macOS</span></button>
+                                <button @click="platform = 'windows'"
+                                    :class="platform === 'windows' ? 'bg-brand-accent text-white' : 'bg-transparent border-2 border-white/20 hover:bg-white/10'"
+                                    class="px-4 py-2 rounded-lg transition-colors"><i class="fab fa-windows"></i><span
+                                        class="hidden">Windows</span></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Download Cards Grid -->
-                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === '2.0'">Downloads for QPrompt 2.0</h3>
+                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === '2.0'">Downloads for
+                    QPrompt 2.0</h3>
                 <div class="grid grid-cols-1 min-h-[520px] md:min-h-[420px]" x-show="ver === '2.0'">
                     <!-- V2.0 -->
-                    <div x-show="ver === '2.0'"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform scale-95"
-                         x-transition:enter-end="opacity-100 transform scale-100"
-                         x-cloak class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
+                    <div x-show="ver === '2.0'" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform scale-95"
+                        x-transition:enter-end="opacity-100 transform scale-100" x-cloak
+                        class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
                         <!-- Linux -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'linux'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
+                            x-show="platform === 'all' || platform === 'linux'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 / Ubuntu 26.04</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 13 /
+                                        Ubuntu 26.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Linux.deb/download" class="text-center text-sm font-bold  bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download .deb (amd64)</a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Linux.deb/download"
+                                            class="text-center text-sm font-bold  bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all border-2 border-brand-primary/30"><i
+                                                class="fas fa-download"></i> Download .deb (amd64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. and RPi OS Trixie</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above
+                                        ver. and RPi OS Trixie</span>
                                     <div class="mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-arm64-Linux.deb/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-arm64-Linux.deb/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10"><i
+                                                class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
 
                         <!-- macOS -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'macos'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-apple text-white"></i> macOS</h4>
+                            x-show="platform === 'all' || platform === 'macos'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-apple text-white"></i> macOS</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest text-brand-primary">Apple Silicon</span>
+                                    <span
+                                        class="text-xs text-gray-300 uppercase font-bold tracking-widest text-brand-primary">Apple
+                                        Silicon</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">Optimized for M1, M2, M3, and later chips.</p> -->
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Apple-macOS.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Apple-macOS.dmg/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Apple Silicon)
                                         </a>
                                     </div>
@@ -318,7 +390,8 @@
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors.</p> -->
                                     <div class="mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Intel-macOS.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-Intel-macOS.dmg/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
                                         </a>
                                     </div>
@@ -328,19 +401,21 @@
 
                         <!-- Windows -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'windows'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-windows text-brand-accent"></i> Windows</h4>
+                            x-show="platform === 'all' || platform === 'windows'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-windows text-brand-accent"></i> Windows</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 10 and later</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 10
+                                        and later</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Windows.exe/download" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v2.0.0/QPrompt-2.0.0-x86_64-Windows.exe/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
                                         </a>
                                     </div>
@@ -349,37 +424,46 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === '1.2'">Downloads for QPrompt 1.2</h3>
+                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === '1.2'">Downloads for
+                    QPrompt 1.2</h3>
                 <div class="grid grid-cols-1 min-h-[520px] md:min-h-[420px]" x-show="ver === '1.2'">
                     <!-- V1.2 -->
-                    <div x-show="ver === '1.2'"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform scale-95"
-                         x-transition:enter-end="opacity-100 transform scale-100"
-                         x-cloak class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
+                    <div x-show="ver === '1.2'" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform scale-95"
+                        x-transition:enter-end="opacity-100 transform scale-100" x-cloak
+                        class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
                         <!-- Linux -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'linux'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
+                            x-show="platform === 'all' || platform === 'linux'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
+                                    <span
+                                        class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.AppImage/download" class="flex-1 text-center text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30"><i class="fas fa-download"></i> Download AppImage (x86_64)</a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.AppImage/download"
+                                            class="flex-1 text-center text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-primary/30"><i
+                                                class="fas fa-download"></i> Download AppImage (x86_64)</a>
                                     </div>
                                 </div>
                                 <div class="pt-2 border-t border-white/10">
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 11 / Ubuntu 22.04</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Debian 11 /
+                                        Ubuntu 22.04</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (amd64)</a>
-                                        <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The above ver. and RPi OS Bullseye</span>
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-arm64.deb/download" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-download"></i> Download .deb (arm64)</a>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-x86_64.deb/download"
+                                            class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i
+                                                class="fas fa-download"></i> Download .deb (amd64)</a>
+                                        <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">The
+                                            above ver. and RPi OS Bullseye</span>
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-linux-gcc-arm64.deb/download"
+                                            class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i
+                                                class="fas fa-download"></i> Download .deb (arm64)</a>
                                     </div>
                                 </div>
                             </div>
@@ -387,20 +471,21 @@
 
                         <!-- macOS -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'macos'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-apple text-white"></i> macOS</h4>
+                            x-show="platform === 'all' || platform === 'macos'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-apple text-white"></i> macOS</h4>
                             <div class="space-y-4">
                                 <div>
                                     <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Intel</span>
                                     <!-- <p class="text-[10px] text-gray-400 mt-1 mb-2">For older Macs with Intel processors. Runs on Apple Silicon via Rosetta 2.</p> -->
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-macos-clang-x86_64.dmg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-macos-clang-x86_64.dmg/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-3 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download DMG (Intel)
                                         </a>
                                     </div>
@@ -410,19 +495,21 @@
 
                         <!-- Windows -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'windows'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-windows text-brand-accent"></i> Windows</h4>
+                            x-show="platform === 'all' || platform === 'windows'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-windows text-brand-accent"></i> Windows</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 7 and later</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Windows 7
+                                        and later</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-windows-cl-msvc2019-x86_64.exe/download" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.2.0-early-access-06/qprompt-v1.2-bc58e78-v1.2-windows-cl-msvc2019-x86_64.exe/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30">
                                             <i class="fas fa-download"></i> Download Installer (.exe)
                                         </a>
                                     </div>
@@ -432,29 +519,32 @@
                     </div>
                 </div>
 
-                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === 'other'">Downloads for Other QPrompt versions (early access and old builds)</h3>
+                <h3 class="text-xl mb-4 display-block font-dyuthi text-center" x-show="ver === 'other'">Downloads for
+                    Other QPrompt versions (early access and old builds)</h3>
                 <div class="grid grid-cols-1 min-h-[520px] md:min-h-[420px]" x-show="ver === 'other'">
                     <!-- Other -->
-                    <div x-show="ver === 'other'"
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform scale-95"
-                         x-transition:enter-end="opacity-100 transform scale-100"
-                         x-cloak class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
+                    <div x-show="ver === 'other'" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 transform scale-95"
+                        x-transition:enter-end="opacity-100 transform scale-100" x-cloak
+                        class="col-start-1 row-start-1 flex flex-wrap justify-center gap-6">
 
-                         <!-- Early Access -->
+                        <!-- Early Access -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-download text-brand-accent"></i> Early Access</h4>
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fas fa-download text-brand-accent"></i> Early Access</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Relatively stable beta builds for Windows, macOS and Linux</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Relatively
+                                        stable beta builds for Windows, macOS and Linux</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="" class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30"><i class="fas fa-download"></i> Download from Patreon posts</a>
+                                        <a href="https://www.patreon.com/qpromptapp"
+                                            class="flex items-center justify-center gap-2 text-sm bg-brand-accent/20 hover:bg-brand-accent hover:text-white px-3 py-3 rounded-lg transition-all font-bold border-2 border-brand-accent/30"><i
+                                                class="fas fa-download"></i> Download from Patreon posts</a>
                                     </div>
                                 </div>
                             </div>
@@ -462,22 +552,26 @@
 
                         <!-- Linux -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-show="platform === 'all' || platform === 'linux'"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-linux text-brand-primary"></i> Linux</h4>
+                            x-show="platform === 'all' || platform === 'linux'"
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-linux text-brand-primary"></i> Linux</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
+                                    <span
+                                        class="text-xs text-gray-300 uppercase font-bold tracking-widest">Universal</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt" class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all text-center font-bold border-2 border-brand-primary/30">
+                                        <a href="https://flathub.org/apps/details/com.cuperino.qprompt"
+                                            class="flex items-center justify-center gap-2 text-sm bg-brand-primary/20 hover:bg-brand-primary px-3 py-3 rounded-lg transition-all text-center font-bold border-2 border-brand-primary/30">
                                             <i class="fas fa-store"></i> QPrompt 1.1.6 Flatpak<br>(x86_64, arm64)
                                         </a>
-                                        <a href="https://snapcraft.io/qprompt" class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i class="fas fa-store"></i> QPrompt 1.1.3 Snap<br>(x86_64)</a>
+                                        <a href="https://snapcraft.io/qprompt"
+                                            class="text-center text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all border-2 border-white/10"><i
+                                                class="fas fa-store"></i> QPrompt 1.1.3 Snap<br>(x86_64)</a>
                                     </div>
                                 </div>
                             </div>
@@ -485,18 +579,20 @@
 
                         <!-- Android -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fab fa-android text-brand-primary"></i> Android</h4>
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i
+                                    class="fab fa-android text-brand-primary"></i> Android</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt 1.1.2</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt
+                                        1.1.2</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-v1.1.2-072f0a7-android-64-debug.apk/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-v1.1.2-072f0a7-android-64-debug.apk/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download APK (arm64)
                                         </a>
                                     </div>
@@ -506,18 +602,20 @@
 
                         <!-- Haiku OS -->
                         <div class="bg-white/10 border-2 border-white/15 rounded-xl p-6 min-w-[280px] flex-1 max-w-[350px] backdrop-blur-md transform-gpu"
-                             x-transition:enter="transition ease-out duration-300"
-                             x-transition:enter-start="opacity-0 scale-95"
-                             x-transition:enter-end="opacity-100 scale-100"
-                             x-transition:leave="transition ease-in duration-200"
-                             x-transition:leave-start="opacity-100 scale-100"
-                             x-transition:leave-end="opacity-0 scale-95">
-                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-globe"></i> Haiku OS</h4>
+                            x-transition:enter="transition ease-out duration-300"
+                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-200"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95">
+                            <h4 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-globe"></i>
+                                Haiku OS</h4>
                             <div class="space-y-4">
                                 <div>
-                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt 1.1.2</span>
+                                    <span class="text-xs text-gray-300 uppercase font-bold tracking-widest">QPrompt
+                                        1.1.2</span>
                                     <div class="flex flex-col gap-2 mt-2">
-                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-1.1.2-1-x86_64.hpkg/download" class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
+                                        <a href="https://sourceforge.net/projects/qprompt/files/v1.1.2/qprompt-1.1.2-1-x86_64.hpkg/download"
+                                            class="flex items-center justify-center gap-2 text-sm bg-white/10 hover:bg-white/20 px-3 py-2 rounded-lg transition-all font-bold border-2 border-white/10">
                                             <i class="fas fa-download"></i> Download .hpkg (x86_64)
                                         </a>
                                     </div>
@@ -538,94 +636,142 @@
                     <p class="text-gray-400">Join QPrompt's open source community!</p>
                     <div class="w-24 h-1 bg-brand-primary mx-auto mt-6"></div>
                 </div>
-                
+
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Share Feedback -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
-                        <i class="fas fa-bullhorn text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
+                        <i
+                            class="fas fa-bullhorn text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Share your feedback</h3>
                         <p class="text-gray-400 mb-6">We listen to all our users.</p>
                         <div class="flex flex-col gap-2">
-                            <a href="https://github.com/Cuperino/QPrompt/issues/new?template=bug_report.md" class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">File Bug Report</a>
-                            <a href="https://github.com/Cuperino/QPrompt/issues/new?template=feature-request.md" class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">Request New Feature</a>
-                            <a href="https://github.com/Cuperino/QPrompt#priorities" class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">Sorting Priorities</a>
+                            <a href="https://github.com/Cuperino/QPrompt/issues/new?template=bug_report.md"
+                                class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">File Bug
+                                Report</a>
+                            <a href="https://github.com/Cuperino/QPrompt/issues/new?template=feature-request.md"
+                                class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">Request New
+                                Feature</a>
+                            <a href="https://github.com/Cuperino/QPrompt#priorities"
+                                class="btn btn-primary btn-sm font-bold border-2 border-brand-primary/30">Sorting
+                                Priorities</a>
                         </div>
                     </div>
 
                     <!-- Translate -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
-                        <i class="fas fa-language text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
+                        <i
+                            class="fas fa-language text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Translate QPrompt</h3>
-                        <p class="text-gray-400 mb-6">QPrompt supports 182+ languages. Help others by translating QPrompt to your native language.</p>
-                        <a href="https://l10n.cuperino.com/projects/qprompt/" class="btn btn-info font-bold w-full border-2 border-brand-info/30">Contribute Translation</a>
+                        <p class="text-gray-400 mb-6">QPrompt supports 182+ languages. Help others by translating
+                            QPrompt to your native language.</p>
+                        <a href="https://l10n.cuperino.com/projects/qprompt/"
+                            class="btn btn-info font-bold w-full border-2 border-brand-info/30">Contribute
+                            Translation</a>
                     </div>
 
                     <!-- Build -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
-                        <i class="fas fa-code text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
+                        <i
+                            class="fas fa-code text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Build QPrompt yourself</h3>
-                        <p class="text-gray-400 mb-6">QPrompt is open source software. You can build almost any iteration in its history yourself.</p>
+                        <p class="text-gray-400 mb-6">QPrompt is open source software. You can build almost any
+                            iteration in its history yourself.</p>
                         <div class="flex flex-col gap-2">
-                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter/" class="btn btn-primary font-bold border-2 border-brand-primary/30">Source Code</a>
-                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter/blob/main/BUILD.md" class="btn btn-primary font-bold border-2 border-brand-primary/30">Build Instructions</a>
+                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter/"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Source Code</a>
+                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter/blob/main/BUILD.md"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Build
+                                Instructions</a>
                         </div>
                     </div>
 
                     <!-- Develop -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
-                        <i class="fab fa-github text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
+                        <i
+                            class="fab fa-github text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Develop QPrompt</h3>
-                        <p class="text-gray-400 mb-6">Written in C++ and QML. Code contributions are welcome with open arms.</p>
+                        <p class="text-gray-400 mb-6">Written in C++ and QML. Code contributions are welcome with open
+                            arms.</p>
                         <div class="flex flex-col gap-2">
-                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter#code-contributions" class="btn btn-info font-bold border-2 border-brand-info/30">Contributing Code</a>
-                            <a href="https://github.com/users/Cuperino/projects/3/views/1/" class="btn btn-info font-bold border-2 border-brand-info/30">Developer Tasks</a>
+                            <a href="https://github.com/Cuperino/QPrompt-Teleprompter#code-contributions"
+                                class="btn btn-info font-bold border-2 border-brand-info/30">Contributing Code</a>
+                            <a href="https://github.com/users/Cuperino/projects/3/views/1/"
+                                class="btn btn-info font-bold border-2 border-brand-info/30">Developer Tasks</a>
                         </div>
                     </div>
 
                     <!-- Patreon -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-red-500/50 transition-all group">
-                        <i class="fab fa-patreon text-4xl text-red-500 mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-red-500/50 transition-all group">
+                        <i
+                            class="fab fa-patreon text-4xl text-red-500 mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Become a Patron</h3>
-                        <p class="text-gray-400 mb-6">Get early access to development builds and vote on polls that determine development focus.</p>
-                        <a href="https://www.patreon.com/qpromptapp/membership" class="btn btn-primary font-bold w-full border-2 border-brand-primary/30">Patreon Benefits</a>
+                        <p class="text-gray-400 mb-6">Get early access to development builds and vote on polls that
+                            determine development focus.</p>
+                        <a href="https://www.patreon.com/qpromptapp/membership"
+                            class="btn btn-primary font-bold w-full border-2 border-brand-primary/30">Patreon
+                            Benefits</a>
                     </div>
 
                     <!-- Documentation -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
-                        <i class="fas fa-book text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
+                        <i
+                            class="fas fa-book text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Write Documentation</h3>
-                        <p class="text-gray-400 mb-6">Help users by contributing to our User Documentation. Licensed FDL 1.3.</p>
+                        <p class="text-gray-400 mb-6">Help users by contributing to our User Documentation. Licensed FDL
+                            1.3.</p>
                         <div class="flex flex-col gap-2">
-                            <a href="https://docs.cuperino.com/0cbWB74kSWC1C1mph2nbKA?both" class="btn btn-primary font-bold border-2 border-brand-primary/30">Write Docs</a>
-                            <a href="https://discord.gg/8TSCZH2WyK" class="btn btn-primary font-bold border-2 border-brand-primary/30">Discord</a>
+                            <a href="https://docs.cuperino.com/0cbWB74kSWC1C1mph2nbKA?both"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Write Docs</a>
+                            <a href="https://discord.gg/8TSCZH2WyK"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Discord</a>
                         </div>
                     </div>
 
                     <!-- Forum -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
-                        <i class="fas fa-users text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
+                        <i
+                            class="fas fa-users text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Join the Forum</h3>
-                        <p class="text-gray-400 mb-6">Share resources and tips about your setup. For all video creators.</p>
-                        <a href="https://forum.cuperino.com/c/qprompt/5" class="btn btn-info font-bold w-full border-2 border-brand-info/30">Share Experiences</a>
+                        <p class="text-gray-400 mb-6">Share resources and tips about your setup. For all video creators.
+                        </p>
+                        <a href="https://forum.cuperino.com/c/qprompt/5"
+                            class="btn btn-info font-bold w-full border-2 border-brand-info/30">Share Experiences</a>
                     </div>
 
                     <!-- Chat -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
-                        <i class="fas fa-comments text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-primary/50 transition-all group">
+                        <i
+                            class="fas fa-comments text-4xl text-brand-primary mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Join the Chat</h3>
-                        <p class="text-gray-400 mb-6">Connect with the project manager and community members instantly.</p>
+                        <p class="text-gray-400 mb-6">Connect with the project manager and community members instantly.
+                        </p>
                         <div class="flex flex-col gap-2">
-                            <a href="https://discord.gg/8TSCZH2WyK" class="btn btn-primary font-bold border-2 border-brand-primary/30">Join Discord</a>
-                            <a href="https://t.me/imaginaryteleprompter" class="btn btn-primary font-bold border-2 border-brand-primary/30">Join Telegram</a>
+                            <a href="https://discord.gg/8TSCZH2WyK"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Join Discord</a>
+                            <a href="https://t.me/imaginaryteleprompter"
+                                class="btn btn-primary font-bold border-2 border-brand-primary/30">Join Telegram</a>
                         </div>
                     </div>
 
                     <!-- Be Excellent -->
-                    <div class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
-                        <i class="fas fa-heart text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
+                    <div
+                        class="p-8 bg-white/5 border-2 border-white/10 rounded-2xl hover:border-brand-accent/50 transition-all group">
+                        <i
+                            class="fas fa-heart text-4xl text-brand-accent mb-6 transition-transform group-hover:scale-110"></i>
                         <h3 class="text-xl mb-4 font-dyuthi">Be Excellent</h3>
-                        <p class="text-gray-400 mb-6">"Be excellent to each other", for being "bogus" is "most non-triumphant".</p>
-                        <a href="https://github.com/Cuperino/QPrompt-Teleprompter#code-of-conduct" class="btn btn-info font-bold w-full border-2 border-brand-info/30">Participation Guidelines</a>
+                        <p class="text-gray-400 mb-6">"Be excellent to each other", for being "bogus" is "most
+                            non-triumphant".</p>
+                        <a href="https://github.com/Cuperino/QPrompt-Teleprompter#code-of-conduct"
+                            class="btn btn-info font-bold w-full border-2 border-brand-info/30">Participation
+                            Guidelines</a>
                     </div>
                 </div>
             </div>
@@ -635,63 +781,113 @@
         <section id="reasons" class="py-12 bg-brand-dark">
             <div class="container mx-auto px-4">
                 <hr class="border-white/10 mb-12">
-                <h2 class="text-center text-3xl font-bold mb-8 uppercase font-dyuthi">Reasons to Use <span class="text-brand-primary">QPrompt</span></h2>
+                <h2 class="text-center text-3xl font-bold mb-8 uppercase font-dyuthi">Reasons to Use <span
+                        class="text-brand-primary">QPrompt</span></h2>
                 <div class="space-y-6 text-gray-300 max-w-4xl mx-auto font-light leading-relaxed">
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>QPrompt aims to solve the needs of teleprompter operators working in the events industry and of video content creators working individually or in small teams.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>QPrompt aims to solve the needs of teleprompter operators working in the events industry and
+                            of video content creators working individually or in small teams.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Licensed under the <a href="https://www.gnu.org/licenses/quick-guide-gplv3.html" class="text-gray-100 underline">GNU General Public License v3</a>, QPrompt is free to use for any purpose, including commercial use.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Licensed under the <a href="https://www.gnu.org/licenses/quick-guide-gplv3.html"
+                                class="text-gray-100 underline">GNU General Public License v3</a>, QPrompt is free to
+                            use for any purpose, including commercial use.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>An adjustable reading area helps ensure people's eyes face the camera instead of darting left and right, regardless of whether they're recording through a webcam or a studio teleprompter setup.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>An adjustable reading area helps ensure people's eyes face the camera instead of darting left
+                            and right, regardless of whether they're recording through a webcam or a studio teleprompter
+                            setup.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>QPrompt's custom made rich text editor allows you to open and copy-paste formatted text from popular office suites. If you have <a href="https://libreoffice.org/" class="text-gray-100 underline">LibreOffice</a> installed on your computer, QPrompt will leverage it in the background to open a wide variety of formats.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>QPrompt's custom made rich text editor allows you to open and copy-paste formatted text from
+                            popular office suites. If you have <a href="https://libreoffice.org/"
+                                class="text-gray-100 underline">LibreOffice</a> installed on your computer, QPrompt will
+                            leverage it in the background to open a wide variety of formats.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>The opacity slider makes QPrompt’s background semi-transparent, which is useful for video conference calls and for displaying other apps in the background, such as a video monitoring feed or a count-down during new year’s eve.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>The opacity slider makes QPrompt’s background semi-transparent, which is useful for video
+                            conference calls and for displaying other apps in the background, such as a video monitoring
+                            feed or a count-down during new year’s eve.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Readers with dyslexia can greatly benefit from QPrompt thanks to the horizontal bars that highlight the reading area (our innovation, carried over from Imaginary Teleprompter), as well as the inclusion of the <a href="https://opendyslexic.org/" class="text-gray-100 underline">OpenDyslexic</a> font.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Readers with dyslexia can greatly benefit from QPrompt thanks to the horizontal bars that
+                            highlight the reading area (our innovation, carried over from Imaginary Teleprompter), as
+                            well as the inclusion of the <a href="https://opendyslexic.org/"
+                                class="text-gray-100 underline">OpenDyslexic</a> font.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Make changes on the fly by swiftly entering and leaving prompt mode, or by double clicking where you wish to edit while prompting. Double click again or press ESC to exit the “edit while prompting mode”.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Make changes on the fly by swiftly entering and leaving prompt mode, or by double clicking
+                            where you wish to edit while prompting. Double click again or press ESC to exit the “edit
+                            while prompting mode”.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Navigate quickly through your script with customizable keyboard shortcuts. Map these to match other devices that act as keyboard emulators, such as presentation clickers and Contour Shuttle Controllers. Use key mapping in combination with <a href="https://kdeconnect.kde.org/" class="text-gray-100 underline">KDE Connect’s</a> presentation mode to control the velocity through your phone.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Navigate quickly through your script with customizable keyboard shortcuts. Map these to match
+                            other devices that act as keyboard emulators, such as presentation clickers and Contour
+                            Shuttle Controllers. Use key mapping in combination with <a
+                                href="https://kdeconnect.kde.org/" class="text-gray-100 underline">KDE Connect’s</a>
+                            presentation mode to control the velocity through your phone.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Named and nameless markers allow you to instantly jump to any predetermined location on the script. Assign a key-combo from your keyboard, pressing those keys while prompting will jump the prompter to your desired location.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Named and nameless markers allow you to instantly jump to any predetermined location on the
+                            script. Assign a key-combo from your keyboard, pressing those keys while prompting will jump
+                            the prompter to your desired location.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Built-in chronometer let's you time your scripts and computes the time to reach the end of the scripts.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Built-in chronometer let's you time your scripts and computes the time to reach the end of
+                            the scripts.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>While nothing beats dedicated hardware for screen duplication. However QPrompt let's you prompt to multiple screens connected to your computer. For dedicated hardware for screen duplication, we recommend <a href="https://decimator.com/" class="text-gray-100 underline">Decimator</a>. We are not sponsored by them, but members of our community love their screen duplicators.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>While nothing beats dedicated hardware for screen duplication. However QPrompt let's you
+                            prompt to multiple screens connected to your computer. For dedicated hardware for screen
+                            duplication, we recommend <a href="https://decimator.com/"
+                                class="text-gray-100 underline">Decimator</a>. We are not sponsored by them, but members
+                            of our community love their screen duplicators.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Thanks to a worldwide community, QPrompt is available in many of the world's most commonly spoken languages. German, Portuguese, Spanish, French, Chinese, Czech, Ukranian and Russian have fairly complete translations. You can <a href="https://l10n.cuperino.com/" class="text-gray-100 underline">contribute translations</a> if you like.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Thanks to a worldwide community, QPrompt is available in many of the world's most commonly
+                            spoken languages. German, Portuguese, Spanish, French, Chinese, Czech, Ukranian and Russian
+                            have fairly complete translations. You can <a href="https://l10n.cuperino.com/"
+                                class="text-gray-100 underline">contribute translations</a> if you like.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>In addition to being translated, QPrompt comes with fonts that allow you to prompt text in writing systems of over 180 languages. RTL writing systems are officially supported.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>In addition to being translated, QPrompt comes with fonts that allow you to prompt text in
+                            writing systems of over 180 languages. RTL writing systems are officially supported.</p>
                     </div>
                     <div class="feature-entry flex gap-4 items-start">
-                        <span class="checkmark flex-shrink-0 text-brand-primary"><i class="fas fa-check-circle"></i></span>
-                        <p>Presently, due to the lack of support for the <a href="https://mosprotocol.com/" class="text-gray-100 underline">MOS</a> and <a href="https://docs.ndi.video/all/developing-with-ndi/introduction" class="text-gray-100 underline">NDI</a> protocols, QPrompt v2.0 is not recommended for use in traditional newsroom environments. If you're interested in supporting the development of these features, please reach out.</p>
+                        <span class="checkmark flex-shrink-0 text-brand-primary"><i
+                                class="fas fa-check-circle"></i></span>
+                        <p>Presently, due to the lack of support for the <a href="https://mosprotocol.com/"
+                                class="text-gray-100 underline">MOS</a> and <a
+                                href="https://docs.ndi.video/all/developing-with-ndi/introduction"
+                                class="text-gray-100 underline">NDI</a> protocols, QPrompt v2.0 is not recommended for
+                            use in traditional newsroom environments. If you're interested in supporting the development
+                            of these features, please reach out.</p>
                     </div>
                 </div>
             </div>
@@ -701,46 +897,64 @@
         <section id="features-cards" class="py-24 bg-black relative">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-20">
-                    <h2 class="font-dyuthi text-4xl mb-6 uppercase">WHY <span class="text-brand-primary">QPROMPT</span>?</h2>
+                    <h2 class="font-dyuthi text-4xl mb-6 uppercase">WHY <span class="text-brand-primary">QPROMPT</span>?
+                    </h2>
                     <div class="w-24 h-1 bg-brand-primary mx-auto"></div>
                 </div>
-                
+
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Feature Cards -->
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-tachometer-alt text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-tachometer-alt text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
                         <h3 class="text-xl font-bold mb-4 font-display">High Performance</h3>
-                        <p class="text-gray-400">Native support for Linux, Windows, and macOS ensures smooth animations even on low-end hardware.</p>
-                    </div>
-                    
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-eye text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
-                        <h3 class="text-xl font-bold mb-4 font-display">Transparent Mode</h3>
-                        <p class="text-gray-400">Make the background semi-transparent for video calls or overlaying on other apps.</p>
-                    </div>
-                    
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-align-center text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
-                        <h3 class="text-xl font-bold mb-4 font-display">Eye Contact</h3>
-                        <p class="text-gray-400">Adjustable reading area keeps your eyes focused on the camera, not darting left and right.</p>
+                        <p class="text-gray-400">Native support for Linux, Windows, and macOS ensures smooth animations
+                            even on low-end hardware.</p>
                     </div>
 
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-file-alt text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-eye text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
+                        <h3 class="text-xl font-bold mb-4 font-display">Transparent Mode</h3>
+                        <p class="text-gray-400">Make the background semi-transparent for video calls or overlaying on
+                            other apps.</p>
+                    </div>
+
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-align-center text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
+                        <h3 class="text-xl font-bold mb-4 font-display">Eye Contact</h3>
+                        <p class="text-gray-400">Adjustable reading area keeps your eyes focused on the camera, not
+                            darting left and right.</p>
+                    </div>
+
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-file-alt text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
                         <h3 class="text-xl font-bold mb-4 font-display">Rich Text</h3>
                         <p class="text-gray-400">Copy-paste formatted text from popular office suites.</p>
                     </div>
 
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-universal-access text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-universal-access text-4xl text-brand-primary mb-6 group-hover:scale-110 transition-transform block"></i>
                         <h3 class="text-xl font-bold mb-4 font-display">Accessibility</h3>
-                        <p class="text-gray-400">Includes OpenDyslexic font and reading guides to assist readers with dyslexia.</p>
+                        <p class="text-gray-400">Includes OpenDyslexic font and reading guides to assist readers with
+                            dyslexia.</p>
                     </div>
-                    
-                    <div class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
-                        <i class="fas fa-keyboard text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
+
+                    <div
+                        class="feature-card p-8 rounded-2xl bg-white/5 border-2 border-white/10 hover:border-brand-primary/50 transition-colors duration-300 group">
+                        <i
+                            class="fas fa-keyboard text-4xl text-brand-accent mb-6 group-hover:scale-110 transition-transform block"></i>
                         <h3 class="text-xl font-bold mb-4 font-display">Full Control</h3>
-                        <p class="text-gray-400">Customizable keyboard shortcuts to integrate with presentation clickers and controllers.</p>
+                        <p class="text-gray-400">Customizable keyboard shortcuts to integrate with presentation clickers
+                            and controllers.</p>
                     </div>
                 </div>
             </div>
@@ -750,9 +964,10 @@
         <section id="support" class="py-24 bg-[#151418] border-t border-white/5">
             <div class="container mx-auto px-4">
                 <div class="grid md:grid-cols-2 gap-12 lg:gap-24 relative">
-                    
+
                     <!-- Vertical Separator (Desktop Only) -->
-                    <div class="hidden md:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 flex-col items-center justify-center">
+                    <div
+                        class="hidden md:flex absolute left-1/2 top-0 bottom-0 -translate-x-1/2 flex-col items-center justify-center">
                         <div class="w-px h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
                         <div class="absolute top-1/2 -translate-y-1/2 flex flex-col gap-2 bg-brand-dark py-4">
                             <div class="w-1.5 h-1.5 rounded-full bg-brand-primary/40"></div>
@@ -763,26 +978,39 @@
 
                     <!-- Donate Column -->
                     <div id="donate" class="text-center flex flex-col justify-center">
-                        <h2 class="text-3xl font-bold mb-6 uppercase font-dyuthi">Support <span class="text-brand-primary">Donating</span></h2>
-                        <p class="mb-6 text-gray-400 font-light mx-auto max-w-lg">If you enjoy using QPrompt, donating is a helpful way to give back. This helps cover infrastructure and hardware needed for testing and development.</p>
-                        <p class="mb-10 text-gray-400 font-light mx-auto max-w-lg">One time donations get you a personal thanks, while Patreon supporters get access to early development builds.</p>
+                        <h2 class="text-3xl font-bold mb-6 uppercase font-dyuthi">Support <span
+                                class="text-brand-primary">Donating</span></h2>
+                        <p class="mb-6 text-gray-400 font-light mx-auto max-w-lg">If you enjoy using QPrompt, donating
+                            is a helpful way to give back. This helps cover infrastructure and hardware needed for
+                            testing and development.</p>
+                        <p class="mb-10 text-gray-400 font-light mx-auto max-w-lg">One time donations get you a personal
+                            thanks, while Patreon supporters get access to early development builds.</p>
                         <div class="flex flex-wrap justify-center gap-4">
-                            <a class="px-8 py-3 bg-white/10 border-2 border-white/20 text-white rounded-full hover:bg-white/20 transition-all font-bold text-sm hover-float" href="https://www.paypal.com/donate/?business=K2M9BF8WFAASG&no_recurring=1&item_name=Your+contribution+goes+towards+the+development+of+QPrompt+Teleprompter+app+and+its+infrastructure.&currency_code=USD" target="_blank">One Time</a>
-                            <a class="px-8 py-3 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-sm hover-float" href="https://www.patreon.com/qpromptapp" target="_blank">Patreon</a>
+                            <a class="px-8 py-3 bg-white/10 border-2 border-white/20 text-white rounded-full hover:bg-white/20 transition-all font-bold text-sm hover-float"
+                                href="https://www.paypal.com/donate/?business=K2M9BF8WFAASG&no_recurring=1&item_name=Your+contribution+goes+towards+the+development+of+QPrompt+Teleprompter+app+and+its+infrastructure.&currency_code=USD"
+                                target="_blank">One Time</a>
+                            <a class="px-8 py-3 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-sm hover-float"
+                                href="https://www.patreon.com/qpromptapp" target="_blank">Patreon</a>
                         </div>
                     </div>
 
                     <!-- Assistance Column -->
                     <div id="assistance" class="text-center flex flex-col justify-center">
-                        <h2 class="text-3xl font-bold mb-6 uppercase font-dyuthi">Need <span class="text-brand-primary">assistance</span>?</h2>
-                        <p class="mb-6 text-gray-400 font-light mx-auto max-w-lg">Join our forum and chats. Ask questions to members of the community. Share resources and tips with other creators.</p>
+                        <h2 class="text-3xl font-bold mb-6 uppercase font-dyuthi">Need <span
+                                class="text-brand-primary">assistance</span>?</h2>
+                        <p class="mb-6 text-gray-400 font-light mx-auto max-w-lg">Join our forum and chats. Ask
+                            questions to members of the community. Share resources and tips with other creators.</p>
                         <div class="mb-8">
-                            <a class="inline-block px-8 py-3 bg-white/10 border-2 border-white/20 text-white rounded-full hover:bg-white/20 transition-all font-bold text-sm hover-float" href="https://docs.qprompt.app" target="_blank">Read User Manual</a>
+                            <a class="inline-block px-8 py-3 bg-white/10 border-2 border-white/20 text-white rounded-full hover:bg-white/20 transition-all font-bold text-sm hover-float"
+                                href="https://docs.qprompt.app" target="_blank">Read User Manual</a>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4">
-                            <a href="https://forum.cuperino.com/c/qprompt/5" class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Forum</a>
-                            <a href="https://discord.gg/8TSCZH2WyK" class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Discord</a>
-                            <a href="https://t.me/imaginaryteleprompter" class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Telegram</a>
+                            <a href="https://forum.cuperino.com/c/qprompt/5"
+                                class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Forum</a>
+                            <a href="https://discord.gg/8TSCZH2WyK"
+                                class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Discord</a>
+                            <a href="https://t.me/imaginaryteleprompter"
+                                class="px-6 py-2 bg-brand-primary/20 border-2 border-brand-primary text-brand-primary rounded-full hover:bg-brand-primary hover:text-white transition-all font-bold text-xs hover-float">Telegram</a>
                         </div>
                     </div>
 
@@ -809,18 +1037,29 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="text-gray-400 text-sm font-light" x-data="{ currentYear: new Date().getFullYear() }">
                     &copy; 2020-<span x-text="currentYear">2026</span> Javier O. Cordero Pérez &amp; Contributors</div>
-                
+
                 <div class="flex gap-6">
-                    <a href="https://x.com/qpromptapp" class="text-gray-400 hover:text-brand-primary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/" class="text-gray-400 hover:text-brand-primary transition-colors"><i class="fab fa-github text-xl"></i></a>
-                    <a href="https://discord.gg/8TSCZH2WyK" class="text-gray-400 hover:text-brand-primary transition-colors"><i class="fab fa-discord text-xl"></i></a>
-                    <a href="https://t.me/imaginaryteleprompter" class="text-gray-400 hover:text-brand-primary transition-colors"><i class="fab fa-telegram text-xl"></i></a>
+                    <a href="https://x.com/qpromptapp"
+                        class="text-gray-400 hover:text-brand-primary transition-colors"><i
+                            class="fab fa-twitter text-xl"></i></a>
+                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/"
+                        class="text-gray-400 hover:text-brand-primary transition-colors"><i
+                            class="fab fa-github text-xl"></i></a>
+                    <a href="https://discord.gg/8TSCZH2WyK"
+                        class="text-gray-400 hover:text-brand-primary transition-colors"><i
+                            class="fab fa-discord text-xl"></i></a>
+                    <a href="https://t.me/imaginaryteleprompter"
+                        class="text-gray-400 hover:text-brand-primary transition-colors"><i
+                            class="fab fa-telegram text-xl"></i></a>
                 </div>
 
                 <div class="flex gap-4 text-xs text-gray-400">
-                    <a href="https://github.com/Cuperino/Signatures/blob/main/CLA.md" class="hover:text-white transition-colors">CLA</a>
-                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/#code-of-conduct" class="hover:text-white transition-colors">CoC</a>
-                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/blob/main/COPYING" class="hover:text-white transition-colors">QPrompt License</a>
+                    <a href="https://github.com/Cuperino/Signatures/blob/main/CLA.md"
+                        class="hover:text-white transition-colors">CLA</a>
+                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/#code-of-conduct"
+                        class="hover:text-white transition-colors">CoC</a>
+                    <a href="https://github.com/Cuperino/QPrompt-Teleprompter/blob/main/COPYING"
+                        class="hover:text-white transition-colors">QPrompt License</a>
                     <a href="LICENSE" class="hover:text-white transition-colors">Website and Assets License</a>
                 </div>
             </div>
@@ -829,389 +1068,388 @@
 
     <!-- Dependencies -->
     <script src="/js/fontawesome.min.js"></script>
-    <script src="/js/popper.min.js"></script> 
+    <script src="/js/popper.min.js"></script>
     <script src="/js/qprompt.js"></script>
     <script type="text/javascript" src="/js/qtloader.js"></script>
     <script defer src="/js/alpine.js"></script>
 
     <!-- Essential Logic -->
     <script type="text/javascript">
-    // Global so we can check if it's already running
-    let qtInstance = null;
-    let wasmLoaded = false;
-    let videoEnded = false;
-    let revealTriggered = false;
-    let introVideoCleaned = false;
-    let isMobile = false;
-    let isHashLanding = false;
+        // Global so we can check if it's already running
+        let qtInstance = null;
+        let wasmLoaded = false;
+        let videoEnded = false;
+        let revealTriggered = false;
+        let introVideoCleaned = false;
+        let isMobile = false;
+        let isHashLanding = false;
 
-    // DOM References (assigned in init)
-    let dom = {
-      screen: null,
-      status: null,
-      video: null,
-      placeholder: null,
-      lastFrame: null,
-      monitorScreen: null
-    };
+        // DOM References (assigned in init)
+        let dom = {
+            screen: null,
+            status: null,
+            video: null,
+            placeholder: null,
+            lastFrame: null,
+            monitorScreen: null
+        };
 
-    // Video configuration - Set these to your preferred fixed values
-    const VIDEO_CONFIG = {
-      scale: 1.00,      // 1.0 = 100%
-      width: 1016,     // px
-      height: 583      // px
-    };
+        // Video configuration - Set these to your preferred fixed values
+        const VIDEO_CONFIG = {
+            scale: 1.00,      // 1.0 = 100%
+            width: 1016,     // px
+            height: 583      // px
+        };
 
-    function cleanupIntroVideo() {
-      if (introVideoCleaned) return;
-      introVideoCleaned = true;
+        function cleanupIntroVideo() {
+            if (introVideoCleaned) return;
+            introVideoCleaned = true;
 
-      try {
-        if (dom.video) {
-          dom.video.pause();
-          dom.video.removeAttribute('src'); // stop any further network loads
-          dom.video.load();                 // flush the now-empty source
-          dom.video.classList.add("hidden");
+            try {
+                if (dom.video) {
+                    dom.video.pause();
+                    dom.video.removeAttribute('src'); // stop any further network loads
+                    dom.video.load();                 // flush the now-empty source
+                    dom.video.classList.add("hidden");
+                }
+                if (dom.lastFrame) dom.lastFrame.hidden = true;
+            } catch (e) {
+                console.log(e);
+            }
         }
-        if (dom.lastFrame) dom.lastFrame.hidden = true;
-      } catch (e) {
-        console.log(e);
-      }
-    }
 
-    function startMonitorSync() {
-      const sourceCanvas = document.querySelector('#qt-window-canvas');
-      const monitorCanvas = document.querySelector('#monitor-canvas');
-      
-      if (!sourceCanvas || !monitorCanvas) {
-        setTimeout(startMonitorSync, 500);
-        return;
-      }
+        function startMonitorSync() {
+            const sourceCanvas = document.querySelector('#qt-window-canvas');
+            const monitorCanvas = document.querySelector('#monitor-canvas');
 
-      const ctx = monitorCanvas.getContext('2d');
-      if (dom.monitorScreen) dom.monitorScreen.style.opacity = "0.4";
-      
-      function sync() {
-        if (sourceCanvas.width !== monitorCanvas.width || sourceCanvas.height !== monitorCanvas.height) {
-          monitorCanvas.width = sourceCanvas.width;
-          monitorCanvas.height = sourceCanvas.height;
+            if (!sourceCanvas || !monitorCanvas) {
+                setTimeout(startMonitorSync, 500);
+                return;
+            }
+
+            const ctx = monitorCanvas.getContext('2d');
+            if (dom.monitorScreen) dom.monitorScreen.style.opacity = "0.4";
+
+            function sync() {
+                if (sourceCanvas.width !== monitorCanvas.width || sourceCanvas.height !== monitorCanvas.height) {
+                    monitorCanvas.width = sourceCanvas.width;
+                    monitorCanvas.height = sourceCanvas.height;
+                }
+                ctx.clearRect(0, 0, monitorCanvas.width, monitorCanvas.height);
+                ctx.drawImage(sourceCanvas, 0, 0);
+                requestAnimationFrame(sync);
+            }
+            sync();
         }
-        ctx.clearRect(0, 0, monitorCanvas.width, monitorCanvas.height);
-        ctx.drawImage(sourceCanvas, 0, 0);
-        requestAnimationFrame(sync);
-      }
-      sync();
-    }
 
-    /**
-     * Unified reveal logic for the hero section.
-     * Handles transitions between video, placeholder, and WASM.
-     */
-    function revealHeroContent() {
-      if (revealTriggered && wasmLoaded) {
-        // If WASM just loaded but we already revealed placeholder, swap them
-        setTimeout(() => {
-          const appContainer = document.querySelector('#qt-shadow-container');
-          console.log("appContainer", appContainer);
-          dom.placeholder.style.opacity = "0";
-          setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
-          appContainer.style.opacity = "0.75";
+        /**
+         * Unified reveal logic for the hero section.
+         * Handles transitions between video, placeholder, and WASM.
+         */
+        function revealHeroContent() {
+            if (revealTriggered && wasmLoaded) {
+                // If WASM just loaded but we already revealed placeholder, swap them
+                setTimeout(() => {
+                    const appContainer = document.querySelector('#qt-shadow-container');
+                    console.log("appContainer", appContainer);
+                    dom.placeholder.style.opacity = "0";
+                    setTimeout(() => dom.placeholder.classList.add("hidden"), 1000);
+                    appContainer.style.opacity = "0.75";
 
-          // Cleanup video once WASM is starting to become visible
-          setTimeout(cleanupIntroVideo, 500);
-        }, 20);
-        return;
-      }
+                    // Cleanup video once WASM is starting to become visible
+                    setTimeout(cleanupIntroVideo, 500);
+                }, 20);
+                return;
+            }
 
-      if (!videoEnded || revealTriggered) return;
+            if (!videoEnded || revealTriggered) return;
 
-      revealTriggered = true;
+            revealTriggered = true;
 
-      if (wasmLoaded) {
-        // Reveal WASM directly
-        const appContainer = document.querySelector('#qt-shadow-container');
-        if (appContainer) {
-          appContainer.style.transition = "opacity 1.0s ease-in";
-          appContainer.style.opacity = "0.75";
-          startMonitorSync();
-          // Delay cleanup until WASM is partially visible to prevent flicker
-          setTimeout(cleanupIntroVideo, 500);
+            if (wasmLoaded) {
+                // Reveal WASM directly
+                const appContainer = document.querySelector('#qt-shadow-container');
+                if (appContainer) {
+                    appContainer.style.transition = "opacity 1.0s ease-in";
+                    appContainer.style.opacity = "0.75";
+                    startMonitorSync();
+                    // Delay cleanup until WASM is partially visible to prevent flicker
+                    setTimeout(cleanupIntroVideo, 500);
+                }
+                if (dom.placeholder) dom.placeholder.classList.add("hidden");
+            } else {
+                // WASM not ready, reveal placeholder as bridge
+                if (dom.placeholder) {
+                    dom.placeholder.style.transition = "opacity 1.0s ease-in";
+                    dom.placeholder.style.opacity = "0.75";
+                    dom.placeholder.classList.remove("hidden");
+                    // Delay cleanup until placeholder is partially visible
+                    setTimeout(cleanupIntroVideo, 500);
+                }
+            }
+
+            if (dom.monitorScreen) {
+                dom.monitorScreen.style.transition = "opacity 1.0s ease-in";
+                dom.monitorScreen.style.opacity = "0.4";
+            }
         }
-        if (dom.placeholder) dom.placeholder.classList.add("hidden");
-      } else {
-        // WASM not ready, reveal placeholder as bridge
-        if (dom.placeholder) {
-          dom.placeholder.style.transition = "opacity 1.0s ease-in";
-          dom.placeholder.style.opacity = "0.75";
-          dom.placeholder.classList.remove("hidden");
-          // Delay cleanup until placeholder is partially visible
-          setTimeout(cleanupIntroVideo, 500);
-        }
-      }
 
-      if (dom.monitorScreen) {
-        dom.monitorScreen.style.transition = "opacity 1.0s ease-in";
-        dom.monitorScreen.style.opacity = "0.4";
-      }
-    }
-
-    function checkAndReveal() {
-      revealHeroContent();
-    }
-
-    function applyFixedVideoSize() {
-      // Monitor center in original video pixels (at scale 1.0)
-      const Mcx = 1520 + 1016 / 2;
-      const Mcy = 503 + 583 / 2;
-
-      const scale = VIDEO_CONFIG.scale;
-      const sw = VIDEO_CONFIG.width;
-      const sh = VIDEO_CONFIG.height;
-      
-      // Update screen dimensions
-      if (dom.screen) {
-        dom.screen.style.maxWidth = `${sw}px`;
-        dom.screen.style.maxHeight = `${sh}px`;
-      }
-      
-      // Update video and last frame to stay centered on the monitor
-      const videoTop = sh / 2 - Mcy * scale;
-      const videoLeft = sw / 2 - Mcx * scale;
-      
-      [dom.video, dom.lastFrame].forEach(el => {
-        if (el) {
-          el.style.transformOrigin = 'top left';
-          el.style.transform = `scale(${scale})`;
-          el.style.top = `${videoTop}px`;
-          el.style.left = `${videoLeft}px`;
-        }
-      });
-
-      const updateDynamicElements = () => {
-        const qtElements = document.querySelectorAll('#qt-shadow-container, [id*="qt-shadow-container"], #qt-window-canvas');
-        [...qtElements, dom.placeholder].forEach(el => {
-          if (el) {
-            el.style.transformOrigin = 'center';
-            el.style.transform = `scale(${scale})`;
-          }
-        });
-
-        if (dom.monitorScreen) {
-          dom.monitorScreen.style.transformOrigin = 'center';
-          dom.monitorScreen.style.transform = `scaleY(-1) scale(${scale})`;
-          dom.monitorScreen.style.top = `${600 * scale}px`; // Adjust top position based on scale
-        }
-      };
-
-      updateDynamicElements();
-      
-      // Use an observer to handle elements added later by WASM loader
-      const observer = new MutationObserver(updateDynamicElements);
-      if (dom.screen) {
-        observer.observe(dom.screen, { childList: true, subtree: true });
-      }
-    }
-
-    function loadWasm(screen, status) {
-      if (qtInstance || isMobile) return;
-      
-      const config = {
-        qt: {
-          onLoaded: () => {
-            console.log("WASM Loaded and ready");
-            wasmLoaded = true;
+        function checkAndReveal() {
             revealHeroContent();
-          },
-          onExit: exitData => {
-            status.innerHTML = 'QPrompt demo couldn\'t load';
-            status.innerHTML += exitData.code !== undefined ? ` with code ${exitData.code}` : '';
-            status.innerHTML += exitData.text !== undefined ? ` (${exitData.text})` : '';
-          },
-          entryFunction: window.qprompt_entry,
-          containerElements: [screen],
         }
-      };
 
-      qtLoad(config).then(instance => {
-        qtInstance = instance;
-      }).catch(e => {
-        wasmLoaded = false;
-        revealHeroContent(); // Fallback to placeholder if WASM fails
-        console.error(e);
-      });
-    }
+        function applyFixedVideoSize() {
+            // Monitor center in original video pixels (at scale 1.0)
+            const Mcx = 1520 + 1016 / 2;
+            const Mcy = 503 + 583 / 2;
 
-    async function init()
-    {
-      dom.screen = document.querySelector('#screen');
-      dom.status = document.querySelector('#qtstatus');
-      dom.video = document.querySelector('#top-video');
-      dom.placeholder = document.querySelector('#placeholder-prompter');
-      dom.lastFrame = document.querySelector('#last-frame');
-      dom.monitorScreen = document.querySelector('#monitor-screen');
-      
-      // Never show placeholder imagery during initial load / while the video plays.
-      if (dom.placeholder) dom.placeholder.style.opacity = "0";
-      if (dom.lastFrame) dom.lastFrame.hidden = true;
-      applyFixedVideoSize();
-      
-      window.mobile = function() {
-        let check = false;
-        (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
-        return check;
-      };
+            const scale = VIDEO_CONFIG.scale;
+            const sw = VIDEO_CONFIG.width;
+            const sh = VIDEO_CONFIG.height;
 
-      isMobile = window.mobile();
-      isHashLanding = window.location.hash && window.location.hash.length > 1;
+            // Update screen dimensions
+            if (dom.screen) {
+                dom.screen.style.maxWidth = `${sw}px`;
+                dom.screen.style.maxHeight = `${sh}px`;
+            }
 
-      if (isMobile) {
-        dom.lastFrame.hidden = false;
-        dom.video.classList.add("hidden");
-        videoEnded = true;
-        wasmLoaded = false; // Never load WASM on mobile
-        revealHeroContent();
-      }
-      else {
-        // Desktop logic
-        if (isHashLanding) {
-          videoEnded = true;
-          dom.video.classList.add("hidden");
-          loadWasm(dom.screen, dom.status);
-          revealHeroContent();
-        } else {
-          // Standard landing, play video
-          if (navigator.userAgent.search("Firefox") !== -1) {
-            dom.video.classList.remove("hidden");
-            dom.lastFrame.hidden = true;
-          }
-          else {
-            dom.video.addEventListener("canplay", () => {
-              if (!isMobile) {
-                dom.video.classList.remove("hidden");
-                dom.lastFrame.hidden = true;
-              }
+            // Update video and last frame to stay centered on the monitor
+            const videoTop = sh / 2 - Mcy * scale;
+            const videoLeft = sw / 2 - Mcx * scale;
+
+            [dom.video, dom.lastFrame].forEach(el => {
+                if (el) {
+                    el.style.transformOrigin = 'top left';
+                    el.style.transform = `scale(${scale})`;
+                    el.style.top = `${videoTop}px`;
+                    el.style.left = `${videoLeft}px`;
+                }
             });
-          }
-          
-          loadWasm(dom.screen, dom.status);
+
+            const updateDynamicElements = () => {
+                const qtElements = document.querySelectorAll('#qt-shadow-container, [id*="qt-shadow-container"], #qt-window-canvas');
+                [...qtElements, dom.placeholder].forEach(el => {
+                    if (el) {
+                        el.style.transformOrigin = 'center';
+                        el.style.transform = `scale(${scale})`;
+                    }
+                });
+
+                if (dom.monitorScreen) {
+                    dom.monitorScreen.style.transformOrigin = 'center';
+                    dom.monitorScreen.style.transform = `scaleY(-1) scale(${scale})`;
+                    dom.monitorScreen.style.top = `${600 * scale}px`; // Adjust top position based on scale
+                }
+            };
+
+            updateDynamicElements();
+
+            // Use an observer to handle elements added later by WASM loader
+            const observer = new MutationObserver(updateDynamicElements);
+            if (dom.screen) {
+                observer.observe(dom.screen, { childList: true, subtree: true });
+            }
         }
-      }
-      
-      // If the video starts playing, ensure no WebP placeholder is visible on top/behind it.
-      dom.video.addEventListener("play", () => {
-        if (isMobile) return;
-        dom.lastFrame.hidden = true;
-        dom.placeholder.style.opacity = "0";
-      });
-      dom.video.addEventListener("playing", () => {
-        if (isMobile) return;
-        dom.lastFrame.hidden = true;
-        dom.placeholder.style.opacity = "0";
-      });
 
-      // Video ending logic
-      const handleVideoEnd = () => {
-        if (videoEnded) return;
-        videoEnded = true;
-        // Unhide the last-frame immediately to prevent flicker
-        if (dom.lastFrame) dom.lastFrame.hidden = false;
-        revealHeroContent();
-      };
+        function loadWasm(screen, status) {
+            if (qtInstance || isMobile) return;
 
-      dom.video.addEventListener("ended", handleVideoEnd);
+            const config = {
+                qt: {
+                    onLoaded: () => {
+                        console.log("WASM Loaded and ready");
+                        wasmLoaded = true;
+                        revealHeroContent();
+                    },
+                    onExit: exitData => {
+                        status.innerHTML = 'QPrompt demo couldn\'t load';
+                        status.innerHTML += exitData.code !== undefined ? ` with code ${exitData.code}` : '';
+                        status.innerHTML += exitData.text !== undefined ? ` (${exitData.text})` : '';
+                    },
+                    entryFunction: window.qprompt_entry,
+                    containerElements: [screen],
+                }
+            };
 
-      // Firefox fallback: sometimes "ended" doesn't fire correctly if the video is at the very end
-      dom.video.addEventListener("timeupdate", () => {
-        if (!videoEnded && dom.video.duration > 0 && dom.video.currentTime >= dom.video.duration - 0.1) {
-          handleVideoEnd();
+            qtLoad(config).then(instance => {
+                qtInstance = instance;
+            }).catch(e => {
+                wasmLoaded = false;
+                revealHeroContent(); // Fallback to placeholder if WASM fails
+                console.error(e);
+            });
         }
-      });
 
-      dom.video.addEventListener("abort", () => {
-        if (isMobile) return;
-        dom.video.classList.add("hidden");
-        dom.lastFrame.hidden = false;
-        handleVideoEnd();
-      });
+        async function init() {
+            dom.screen = document.querySelector('#screen');
+            dom.status = document.querySelector('#qtstatus');
+            dom.video = document.querySelector('#top-video');
+            dom.placeholder = document.querySelector('#placeholder-prompter');
+            dom.lastFrame = document.querySelector('#last-frame');
+            dom.monitorScreen = document.querySelector('#monitor-screen');
 
-      dom.video.addEventListener("error", () => {
-        if (isMobile) return;
-        dom.video.classList.add("hidden");
-        dom.lastFrame.hidden = false;
-        handleVideoEnd();
-      });
+            // Never show placeholder imagery during initial load / while the video plays.
+            if (dom.placeholder) dom.placeholder.style.opacity = "0";
+            if (dom.lastFrame) dom.lastFrame.hidden = true;
+            applyFixedVideoSize();
 
-      window.addEventListener('scroll', updateParallax);
-      window.addEventListener('resize', updateParallax);
-      updateParallax(); // Initial call
-    }
+            window.mobile = function () {
+                let check = false;
+                (function (a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true; })(navigator.userAgent || navigator.vendor || window.opera);
+                return check;
+            };
 
-    // Parallax Background Logic
-    function updateParallax() {
-      const parallax = document.querySelector('.parallax-bg');
-      if (parallax) {
-        const rect = parallax.getBoundingClientRect();
-        const winHeight = window.innerHeight;
-        if (rect.top < winHeight && rect.bottom > 0) {
-          const offset = winHeight - rect.top;
-          // Reduced factor from 0.4 to 0.15 to match the reduced background-size zoom
-          parallax.style.backgroundPositionY = `calc(50% + ${(offset - winHeight/2) * 0.15}px)`;
+            isMobile = window.mobile();
+            isHashLanding = window.location.hash && window.location.hash.length > 1;
+
+            if (isMobile) {
+                dom.lastFrame.hidden = false;
+                dom.video.classList.add("hidden");
+                videoEnded = true;
+                wasmLoaded = false; // Never load WASM on mobile
+                revealHeroContent();
+            }
+            else {
+                // Desktop logic
+                if (isHashLanding) {
+                    videoEnded = true;
+                    dom.video.classList.add("hidden");
+                    loadWasm(dom.screen, dom.status);
+                    revealHeroContent();
+                } else {
+                    // Standard landing, play video
+                    if (navigator.userAgent.search("Firefox") !== -1) {
+                        dom.video.classList.remove("hidden");
+                        dom.lastFrame.hidden = true;
+                    }
+                    else {
+                        dom.video.addEventListener("canplay", () => {
+                            if (!isMobile) {
+                                dom.video.classList.remove("hidden");
+                                dom.lastFrame.hidden = true;
+                            }
+                        });
+                    }
+
+                    loadWasm(dom.screen, dom.status);
+                }
+            }
+
+            // If the video starts playing, ensure no WebP placeholder is visible on top/behind it.
+            dom.video.addEventListener("play", () => {
+                if (isMobile) return;
+                dom.lastFrame.hidden = true;
+                dom.placeholder.style.opacity = "0";
+            });
+            dom.video.addEventListener("playing", () => {
+                if (isMobile) return;
+                dom.lastFrame.hidden = true;
+                dom.placeholder.style.opacity = "0";
+            });
+
+            // Video ending logic
+            const handleVideoEnd = () => {
+                if (videoEnded) return;
+                videoEnded = true;
+                // Unhide the last-frame immediately to prevent flicker
+                if (dom.lastFrame) dom.lastFrame.hidden = false;
+                revealHeroContent();
+            };
+
+            dom.video.addEventListener("ended", handleVideoEnd);
+
+            // Firefox fallback: sometimes "ended" doesn't fire correctly if the video is at the very end
+            dom.video.addEventListener("timeupdate", () => {
+                if (!videoEnded && dom.video.duration > 0 && dom.video.currentTime >= dom.video.duration - 0.1) {
+                    handleVideoEnd();
+                }
+            });
+
+            dom.video.addEventListener("abort", () => {
+                if (isMobile) return;
+                dom.video.classList.add("hidden");
+                dom.lastFrame.hidden = false;
+                handleVideoEnd();
+            });
+
+            dom.video.addEventListener("error", () => {
+                if (isMobile) return;
+                dom.video.classList.add("hidden");
+                dom.lastFrame.hidden = false;
+                handleVideoEnd();
+            });
+
+            window.addEventListener('scroll', updateParallax);
+            window.addEventListener('resize', updateParallax);
+            updateParallax(); // Initial call
         }
-      }
-    }
 
-    // Initialize ResizeObserver for Parallax
-    document.addEventListener('DOMContentLoaded', () => {
-      const parallax = document.querySelector('.parallax-bg');
-      if (parallax && window.ResizeObserver) {
-        const ro = new ResizeObserver(() => {
-          updateParallax();
+        // Parallax Background Logic
+        function updateParallax() {
+            const parallax = document.querySelector('.parallax-bg');
+            if (parallax) {
+                const rect = parallax.getBoundingClientRect();
+                const winHeight = window.innerHeight;
+                if (rect.top < winHeight && rect.bottom > 0) {
+                    const offset = winHeight - rect.top;
+                    // Reduced factor from 0.4 to 0.15 to match the reduced background-size zoom
+                    parallax.style.backgroundPositionY = `calc(50% + ${(offset - winHeight / 2) * 0.15}px)`;
+                }
+            }
+        }
+
+        // Initialize ResizeObserver for Parallax
+        document.addEventListener('DOMContentLoaded', () => {
+            const parallax = document.querySelector('.parallax-bg');
+            if (parallax && window.ResizeObserver) {
+                const ro = new ResizeObserver(() => {
+                    updateParallax();
+                });
+                ro.observe(parallax);
+            }
         });
-        ro.observe(parallax);
-      }
-    });
     </script>
-    
+
     <!-- Animations Script -->
     <script type="module">
         import { animate, inView, scroll } from "motion";
-        
+
         // Scroll Animations for Feature Cards
         document.querySelectorAll(".feature-card").forEach((card, index) => {
             inView(card, (element) => {
-                animate(element, { 
-                    opacity: [0, 1], 
-                    transform: ["translateY(20px)", "translateY(0px)"] 
+                animate(element, {
+                    opacity: [0, 1],
+                    transform: ["translateY(20px)", "translateY(0px)"]
                 }, { duration: 0.5, delay: index * 0.1 });
             });
         });
 
         // Scroll Animation for About Section
         inView("#about", (element) => {
-            animate(element.querySelector("h2"), { 
-                opacity: [0, 1], 
-                transform: ["translateY(20px)", "translateY(0px)"] 
+            animate(element.querySelector("h2"), {
+                opacity: [0, 1],
+                transform: ["translateY(20px)", "translateY(0px)"]
             }, { duration: 0.8 });
-            animate(element.querySelector("p"), { 
-                opacity: [0, 1], 
-                transform: ["translateY(20px)", "translateY(0px)"] 
+            animate(element.querySelector("p"), {
+                opacity: [0, 1],
+                transform: ["translateY(20px)", "translateY(0px)"]
             }, { duration: 0.8, delay: 0.2 });
         });
 
         // Scroll Animations for Feature Entries (Reasons to Use)
         document.querySelectorAll(".feature-entry").forEach((entry) => {
             const checkmark = entry.querySelector(".checkmark");
-            
+
             inView(entry, (element) => {
                 // Animate the container entry
-                animate(element, { 
-                    opacity: [0, 1], 
-                    transform: ["translateY(20px)", "translateY(0px)"] 
+                animate(element, {
+                    opacity: [0, 1],
+                    transform: ["translateY(20px)", "translateY(0px)"]
                 }, { duration: 0.6, easing: "ease-out" });
 
                 // Animate the checkmark specifically
                 if (checkmark) {
-                    animate(checkmark, { 
+                    animate(checkmark, {
                         opacity: [0, 1],
                         transform: ["scale(0) rotate(-45deg)", "scale(1.2) rotate(0deg)", "scale(1) rotate(0deg)"]
                     }, { duration: 0.5, delay: 0.2, easing: "ease-out" });
@@ -1220,4 +1458,5 @@
         });
     </script>
 </body>
+
 </html>
